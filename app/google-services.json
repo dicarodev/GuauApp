@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "968948311369",
+    "project_id": "guauapp-29679",
+    "storage_bucket": "guauapp-29679.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968948311369:android:b16ca4f08af88078152698",
+        "android_client_info": {
+          "package_name": "com.guauapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968948311369-0h9j2g05h2o970gu03n6r0h6dckiejlg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guauapp",
+            "certificate_hash": "9c6715f114e20622ad766c8e1d8ac13a0f40355a"
+          }
+        },
+        {
+          "client_id": "968948311369-6h2b0bltg4m28nbhna21hge20v3b5ucl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZOMxQzGQxqyixvjGn7IeD9rNNwKmQ7is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968948311369-6h2b0bltg4m28nbhna21hge20v3b5ucl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
