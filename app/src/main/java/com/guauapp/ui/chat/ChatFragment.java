@@ -1,4 +1,4 @@
-package com.guauapp.ui.notifications;
+package com.guauapp.ui.chat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.guauapp.databinding.FragmentNotificationsBinding;
+import com.guauapp.databinding.FragmentChatBinding;
 
-public class NotificationsFragment extends Fragment {
+public class ChatFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentChatBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        ChatViewModel chatViewModel =
+                new ViewModelProvider(this).get(ChatViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentChatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        chatViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
