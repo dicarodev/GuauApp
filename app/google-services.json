@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "968948311369",
+    "firebase_url": "https://guauapp-29679-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "guauapp-29679",
     "storage_bucket": "guauapp-29679.appspot.com"
   },
@@ -19,6 +20,22 @@
           "android_info": {
             "package_name": "com.guauapp",
             "certificate_hash": "9c6715f114e20622ad766c8e1d8ac13a0f40355a"
+          }
+        },
+        {
+          "client_id": "968948311369-n19lfv4i4b1eg6oioltq9jv3bvaiajnn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guauapp",
+            "certificate_hash": "abf205496bd26ce8bf9f68bf7ec11f677cbbf3d0"
+          }
+        },
+        {
+          "client_id": "968948311369-vl1vnp4g0s0v72gb45k1rn1gpgu3uk0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guauapp",
+            "certificate_hash": "04899a54e24874c60b87f1c0d1d9fffb5adfb88f"
           }
         },
         {

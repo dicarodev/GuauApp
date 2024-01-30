@@ -25,7 +25,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
 
-    DatabaseReference mDatabase = FirebaseDatabase.getInstance("https://guauapp-29679-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +38,6 @@ public class ProfileFragment extends Fragment {
         final TextView textView = binding.txvDogName;
         profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
-
-
     }
 
     @Override
