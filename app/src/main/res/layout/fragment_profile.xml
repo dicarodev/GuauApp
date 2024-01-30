@@ -48,12 +48,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txv_description" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txv_breed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:hint="Raza"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txv_ownerName" />
 
@@ -65,7 +65,7 @@
         android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_breed" />
 
     <ImageView
         android:id="@+id/imageView"
