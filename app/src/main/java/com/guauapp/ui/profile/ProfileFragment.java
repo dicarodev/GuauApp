@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +53,23 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onClick(View view) {
-        addDog();
+        EditText dogName =  binding.txvDogName;
+        EditText breed =    binding.txvBreed;
+        EditText descrption =    binding.txvDescrption;
+        EditText owenerName =    binding.txvOwenerName;
+
+        String province = "ciudad Real";
+        String location = "Alcazar";
+        ArrayList tags = new ArrayList();
+        Dog dog = new Dog(4321,
+                            dogName.getText().toString(),
+                            owenerName.getText().toString(),
+                            breed.getText().toString(),
+                            province,
+                            location,
+                            tags,
+                            descrption.getText().toString());
+        addDog(dog);
     }
 
     @Override
@@ -61,16 +78,15 @@ public class ProfileFragment extends Fragment {
         binding = null;
     }
 
-    public void addDog(){
+    public void addDog(Dog dog){
         // Crear un objeto Dog con información específica
-        Dog dog = new Dog(4321, "tobi","manolo","Pastor alemán","Ciudad real","Alcázar", new ArrayList<>(), "vacia");
+
 
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
         FirebaseUser user = MainActivity.user;
-        System.out.println(user.getEmail());
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
-        mDatabase.child("dogs").child(user.getEmail().split("@")[0]).setValue(dog)
+        mDatabase.child("dogs").child(user.getUid()).setValue(dog)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
