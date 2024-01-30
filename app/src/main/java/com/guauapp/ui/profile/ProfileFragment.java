@@ -14,12 +14,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.guauapp.MainActivity;
 import com.guauapp.databinding.FragmentProfileBinding;
 import com.guauapp.model.Dog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProfileFragment extends Fragment {
 
@@ -63,8 +67,10 @@ public class ProfileFragment extends Fragment {
 
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
+        FirebaseUser user = MainActivity.user;
+        System.out.println(user.getEmail());
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
-        mDatabase.child("dogs").child(key).setValue(dog)
+        mDatabase.child("dogs").child(user.getEmail().split("@")[0]).setValue(dog)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

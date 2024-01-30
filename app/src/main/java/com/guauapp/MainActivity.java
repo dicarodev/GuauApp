@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton signInButton;
 
+    public static FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             Toast.makeText(this, "Bienvenido " + user.getDisplayName()
                     + "[" + user.getEmail() + "]", Toast.LENGTH_LONG).show();
+
+            this.user = user;
             signInButton.setVisibility(View.GONE);
         } else {
             signInButton.setVisibility(View.VISIBLE);
