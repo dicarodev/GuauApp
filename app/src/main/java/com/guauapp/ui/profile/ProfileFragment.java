@@ -63,14 +63,15 @@ public class ProfileFragment extends Fragment {
 
     public void addDog(){
         // Crear un objeto Dog con información específica
-        Dog dog = new Dog(4321, "tobi","manolo","Pastor alemán","Ciudad real","Alcázar", new ArrayList<>(), "vacia");
+        Dog dog = new Dog(4321, "tobi","diego","Pastor alemán","Ciudad real","Alcázar", new ArrayList<>(), "vacia");
 
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
         FirebaseUser user = MainActivity.user;
-        System.out.println(user.getEmail());
+        //System.out.println(user.getEmail());
+        System.out.println(user.getUid());
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
-        mDatabase.child("dogs").child(user.getEmail().split("@")[0]).setValue(dog)
+        mDatabase.child("dogs").child(user.getUid()).setValue(dog)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_logIn">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -22,4 +22,10 @@
         android:name="com.guauapp.ui.chat.ChatFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/navigation_logIn"
+        android:name="com.guauapp.ui.logIn.LogInFragment"
+        android:label="LogIn"
+        tools:layout="@layout/fragment_login" />
 </navigation>
