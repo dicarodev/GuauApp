@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
+
     <Button
         android:id="@+id/btn_addDog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
         android:text="Añadir perro"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_descrption" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -56,27 +55,39 @@
         app:layout_constraintTop_toBottomOf="@+id/txv_dogName" />
 
     <EditText
-        android:id="@+id/txv_breed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:ems="10"
-        android:hint="Raza"
-        android:inputType="text"
-        android:maxLines="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txv_owenerName" />
-
-    <EditText
         android:id="@+id/txv_descrption"
-        android:layout_width="368dp"
-        android:layout_height="182dp"
+        android:layout_width="211dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:ems="10"
         android:hint="Descripcion"
         android:inputType="text"
         android:maxLength="150"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txv_breed" />
+        app:layout_constraintTop_toBottomOf="@+id/spn_cities" />
+
+    <Spinner
+        android:id="@+id/spn_breed"
+        android:layout_width="210dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_owenerName" />
+
+    <Spinner
+        android:id="@+id/spn_province"
+        android:layout_width="210dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spn_breed" />
+
+    <Spinner
+        android:id="@+id/spn_cities"
+        android:layout_width="210dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spn_province" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
