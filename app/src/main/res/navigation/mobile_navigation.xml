@@ -26,6 +26,6 @@
     <fragment
         android:id="@+id/navigation_logIn"
         android:name="com.guauapp.ui.logIn.LogInFragment"
-        android:label="LogIn"
+        android:label="@string/title_logIn"
         tools:layout="@layout/fragment_login" />
 </navigation>

@@ -1,7 +1,5 @@
 package com.guauapp.model;
 
-import android.widget.ArrayAdapter;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +48,26 @@ public class DogsDAO {
                     breedList.add(breed.getName());
                 }
                 future.complete(breedList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return future;
+    }
+
+    // Obetener los id de los perros para comprobar si existen
+    public CompletableFuture<List<String>> getDogsIdAsync() {
+        List<String> dogsList = new ArrayList<>();
+        CompletableFuture<List<String>> future = new CompletableFuture<>();
+        mDatabase.child("dogs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Dog dog = productSnapshot.getValue(Dog.class);
+                    dogsList.add(dog.getId());
+                }
+                future.complete(dogsList);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

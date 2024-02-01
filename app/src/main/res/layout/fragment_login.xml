@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bannerlogin3"
     tools:context=".ui.logIn.LogInFragment">
 
     <TextView
         android:id="@+id/txv_logInSingUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="LogIn / SingUp"
+        android:layout_marginTop="276dp"
+        android:fontFamily="@font/pacifico"
+        android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="#009688"
-        android:textSize="24sp"
+        android:textColor="@color/brown_app_name"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +26,7 @@
         android:id="@+id/signInButton"
         android:layout_width="222dp"
         android:layout_height="54dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +34,12 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_width="220dp"
+        android:layout_height="213dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txv_logInSingUp"
-        app:srcCompat="@drawable/descarga" />
+        app:srcCompat="@drawable/logo_discord" />
 </androidx.constraintlayout.widget.ConstraintLayout>
