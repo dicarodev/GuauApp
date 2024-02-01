@@ -19,8 +19,9 @@ public class DogsDAO {
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public List<Province> getProvinces() {
+    public CompletableFuture<List<Province>> getProvincesAsync() {
         List<Province> provinceList = new ArrayList<>();
+        CompletableFuture<List<Province>> future = new CompletableFuture<>();
         mDatabase.child("provinces").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -28,16 +29,16 @@ public class DogsDAO {
                     Province province = productSnapshot.getValue(Province.class);
                     provinceList.add(province);
                 }
-
+                future.complete(provinceList);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return provinceList;
+        return future;
     }
 
-    public CompletableFuture<List<String>> getBreedsAsync() {
+    public CompletableFuture<List<String>> getBreedsIdAsync() {
         List<String> breedList = new ArrayList<>();
         CompletableFuture<List<String>> future = new CompletableFuture<>();
         mDatabase.child("breed").addValueEventListener(new ValueEventListener() {

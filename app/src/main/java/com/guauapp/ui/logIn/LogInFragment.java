@@ -150,9 +150,8 @@ public class LogInFragment extends Fragment {
         if (user != null) {
             Toast.makeText(this.requireContext(), "Bienvenido " + user.getDisplayName()
                     + "[" + user.getEmail() + "]", Toast.LENGTH_LONG).show();
-
+            LogInFragment.user = user;
             if(dogList.contains(user.getUid())) {
-                LogInFragment.user = user;
                 navController.navigate(R.id.navigation_home);
                 navView.setVisibility(View.VISIBLE);
             }else{
