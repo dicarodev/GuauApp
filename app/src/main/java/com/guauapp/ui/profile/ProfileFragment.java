@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +30,11 @@ import com.guauapp.model.Breed;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
 import com.guauapp.model.Province;
+import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -97,7 +100,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         String province = binding.spnProvince.getSelectedItem().toString();
         String location = binding.spnCities.getSelectedItem().toString();
         ArrayList tags = new ArrayList();
-        Dog dog = new Dog(MainActivity.user.getUid(),
+        Dog dog = new Dog(LogInFragment.user.getUid(),
                             dogName.getText().toString(),
                             owenerName.getText().toString(),
                             breed,
@@ -118,7 +121,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
 
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
-        FirebaseUser user = MainActivity.user;
+        FirebaseUser user = LogInFragment.user;
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
         mDatabase.child("dogs").child(user.getUid()).setValue(dog)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
