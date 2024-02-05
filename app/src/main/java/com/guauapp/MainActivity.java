@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         navView.setItemIconTintList(null);
-
-        navView.setVisibility(View.INVISIBLE);
-
     }
 
 
