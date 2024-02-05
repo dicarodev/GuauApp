@@ -4,7 +4,6 @@
     android:id="@+id/cardView_dog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/brown_light"
     app:cardCornerRadius="16dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
@@ -41,8 +40,7 @@
 
             <ImageView
                 android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_location" />
+                android:layout_height="24dp" />
 
             <TextView
                 android:id="@+id/txv_cardCity"
@@ -51,14 +49,12 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="Alcázar de San Juan"
-                android:textColor="@color/brown_dark"
                 android:textSize="14dp" />
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:contentDescription="Icono de Raza"
-                android:src="@drawable/ic_dog_breed" />
+                android:contentDescription="Icono de Raza" />
 
             <TextView
                 android:id="@+id/txv_cardBreed"
@@ -67,7 +63,6 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="Golden Retriever"
-                android:textColor="@color/brown_dark"
                 android:textSize="14dp" />
         </LinearLayout>
 
@@ -76,7 +71,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/brown_app_name"
             android:text="Ver Perfil"
             android:textColor="@android:color/white" />
 

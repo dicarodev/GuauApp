@@ -9,29 +9,62 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.guauapp.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentHomeBinding binding;  // Objeto de enlace para el diseño de HomeFragment
+    private List<String> dogList = new ArrayList<>();  // Lista para almacenar nombres de perros
+    private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
+    private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
+    private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
 
+
+    // Este método se llama cuando se crea el fragmento
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        // Crea una instancia de HomeViewModel utilizando ViewModelProvider
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
+        // Infla el diseño para este fragmento usando enlace de datos
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return root;  // Devuelve la vista raíz del fragmento
     }
 
+    // Este método se llama cuando el fragmento está a punto de hacerse visible
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        configureRecyclerView();  // Configura y prepara el RecyclerView
+    }
+
+    // Método para configurar y preparar el RecyclerView
+    private void configureRecyclerView() {
+        recyclerView = binding.recyclerViewDogs;  // Obtiene la referencia al RecyclerView desde el enlace
+
+        // Crea un LinearLayoutManager para el RecyclerView
+        rvLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(rvLayoutManager);
+
+        // Crea un adaptador para el RecyclerView y establece
+        rvAdapter = new DogsRecyclerViewAdapter(dogList);
+        recyclerView.setAdapter(rvAdapter);
+    }
+
+    // Este método se llama cuando el fragmento está a punto de ser destruido
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        binding = null;  // Establece el objeto de enlace como nulo para evitar pérdidas de memoria
     }
 }
