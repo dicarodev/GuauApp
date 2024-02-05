@@ -1,5 +1,6 @@
 package com.guauapp.model;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 public class Dog implements Serializable {
         private String id;
@@ -10,11 +11,14 @@ public class Dog implements Serializable {
         private String location;
         private List<String> tags;
         private String description;
+        private String age;
+        private String castrated;
+        private ArrayList<String> images;
 
         public Dog() {
         }
 
-        public Dog(String id, String dog_name, String owner_name, String breed, String province, String location, List<String> tags, String description) {
+        public Dog(String id, String dog_name, String owner_name, String breed, String province, String location, List<String> tags, String description, String age, String castrated, ArrayList<String> images) {
                 this.id = id;
                 this.dog_name = dog_name;
                 this.owner_name = owner_name;
@@ -23,6 +27,9 @@ public class Dog implements Serializable {
                 this.location = location;
                 this.tags = tags;
                 this.description = description;
+                this.age = age;
+                this.castrated = castrated;
+                this.images = images;
         }
 
         public String getId() {
@@ -87,5 +94,29 @@ public class Dog implements Serializable {
 
         public void setDescription(String description) {
                 this.description = description;
+        }
+
+        public String getAge() {
+                return age;
+        }
+
+        public void setAge(String age) {
+                this.age = age;
+        }
+
+        public String getCastrated() {
+                return castrated;
+        }
+
+        public void setCastrated(String castrated) {
+                this.castrated = castrated;
+        }
+
+        public ArrayList<String> getImages() {
+                return images;
+        }
+
+        public void setImages(ArrayList<String> images) {
+                this.images = images;
         }
 }

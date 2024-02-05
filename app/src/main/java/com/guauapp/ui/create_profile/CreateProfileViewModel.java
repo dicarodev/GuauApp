@@ -1,12 +1,14 @@
-package com.guauapp.ui.profile;
+package com.guauapp.ui.create_profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-public class ProfileViewModel {
+public class CreateProfileViewModel extends ViewModel {
+
     private final MutableLiveData<String> mText;
 
-    public ProfileViewModel() {
+    public CreateProfileViewModel() {
         mText = new MutableLiveData<>();
     }
 

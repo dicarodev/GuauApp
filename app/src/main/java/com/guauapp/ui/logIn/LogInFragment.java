@@ -155,7 +155,7 @@ public class LogInFragment extends Fragment {
                 navController.navigate(R.id.navigation_home);
                 navView.setVisibility(View.VISIBLE);
             }else{
-                navController.navigate(R.id.navigation_profile);
+                navController.navigate(R.id.navigation_create_profile);
                 navView.setVisibility(View.VISIBLE);
             }
 
