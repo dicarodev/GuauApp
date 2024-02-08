@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Ver Perfil"
+            android:backgroundTint="@color/brown_dark"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

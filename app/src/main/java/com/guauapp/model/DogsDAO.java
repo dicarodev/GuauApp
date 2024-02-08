@@ -31,6 +31,7 @@ public class DogsDAO {
                 }
                 future.complete(provinceList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -50,6 +51,7 @@ public class DogsDAO {
                 }
                 future.complete(breedList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -70,6 +72,28 @@ public class DogsDAO {
                 }
                 future.complete(dogsList);
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return future;
+    }
+
+    // Obetener los perros
+    public CompletableFuture<List<Dog>> getDogsAsync() {
+        List<Dog> dogsList = new ArrayList<>();
+        CompletableFuture<List<Dog>> future = new CompletableFuture<>();
+        mDatabase.child("dogs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Dog dog = productSnapshot.getValue(Dog.class);
+                    dogsList.add(dog);
+                }
+                future.complete(dogsList);
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
