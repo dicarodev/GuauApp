@@ -186,7 +186,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         } else if (binding.rdSenior.isChecked()) {
             age = "Senior";
         }
-        ArrayList tags = new ArrayList();
         insertPhotosIntoStorage();
         Dog dog = new Dog(LogInFragment.user.getUid(),
                             dogName.getText().toString(),
@@ -194,7 +193,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
                             breed,
                             province,
                             location,
-                            tags,
                             descrption.getText().toString(),
                             age,
                             castrated,
