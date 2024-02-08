@@ -19,9 +19,9 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
 
     public DogsRecyclerViewAdapter(List<Dog> dogList) {
         this.dogList = dogList;
-        this.dogList.add(new Dog(55, "Tobi", "", "Golden", "Ciudad Real", "Alcazar", null, ""));
-        this.dogList.add(new Dog(56, "Lana", "", "Labrador", "Ciudad Real", "Herencia", null, ""));
-        this.dogList.add(new Dog(57, "Rulo", "", "Caniche", "Ciudad Real", "Tomelloso", null, ""));
+        this.dogList.add(new Dog("55", "Tobi", "", "Golden", "Ciudad Real", "Alcazar", null, ""));
+        this.dogList.add(new Dog("56", "Lana", "", "Labrador", "Ciudad Real", "Herencia", null, ""));
+        this.dogList.add(new Dog("57", "Rulo", "", "Caniche", "Ciudad Real", "Tomelloso", null, ""));
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
