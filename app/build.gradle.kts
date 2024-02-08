@@ -50,6 +50,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
 
+    //Implementacion para cambiar las fotos al crear el perfil
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+
+
     // BoM Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
 
@@ -59,6 +65,7 @@ dependencies {
 
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-firestore:24.10.1")
 
     testImplementation("junit:junit:4.13.2")
 

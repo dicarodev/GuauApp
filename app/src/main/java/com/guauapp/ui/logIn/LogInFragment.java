@@ -77,6 +77,8 @@ public class LogInFragment extends Fragment {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this.requireContext(), googleSignInOptions);
 
+        enableBottomBar(false);
+
         setDogList();
     }
 
@@ -84,6 +86,12 @@ public class LogInFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void enableBottomBar(boolean enable){
+        for (int i = 0; i < navView.getMenu().size(); i++) {
+            navView.getMenu().getItem(i).setEnabled(enable);
+        }
     }
 
     private void configureFirebase() {
@@ -152,10 +160,11 @@ public class LogInFragment extends Fragment {
                     + "[" + user.getEmail() + "]", Toast.LENGTH_LONG).show();
             LogInFragment.user = user;
             if(dogList.contains(user.getUid())) {
+                enableBottomBar(true);
                 navController.navigate(R.id.navigation_home);
                 navView.setVisibility(View.VISIBLE);
             }else{
-                navController.navigate(R.id.navigation_profile);
+                navController.navigate(R.id.navigation_create_profile);
                 navView.setVisibility(View.VISIBLE);
             }
 

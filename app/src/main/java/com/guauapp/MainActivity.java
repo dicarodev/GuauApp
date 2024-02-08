@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     private ActivityMainBinding binding;
 
     @Override
@@ -62,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         navView.setItemIconTintList(null);
-
-        navView.setVisibility(View.INVISIBLE);
-
     }
 
 

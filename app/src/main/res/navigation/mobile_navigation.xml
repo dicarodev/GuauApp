@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.guauapp.ui.profile.ProfileFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/navigation_create_profile"
+        android:name="com.guauapp.ui.create_profile.CreateProfileFragment"
+        android:label="@string/title_create_profile"
+        tools:layout="@layout/fragment_create_profile" />
 
     <fragment
         android:id="@+id/navigation_chat"
@@ -28,4 +28,10 @@
         android:name="com.guauapp.ui.logIn.LogInFragment"
         android:label="@string/title_logIn"
         tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.guauapp.ui.profile.ProfileFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
