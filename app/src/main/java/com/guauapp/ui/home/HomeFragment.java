@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.guauapp.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
+import com.guauapp.model.Dog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;  // Objeto de enlace para el diseño de HomeFragment
-    private List<String> dogList = new ArrayList<>();  // Lista para almacenar nombres de perros
+    private List<Dog> dogList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
     private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
@@ -56,7 +57,7 @@ public class HomeFragment extends Fragment {
         rvLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(rvLayoutManager);
 
-        // Crea un adaptador para el RecyclerView y establece
+        // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
         rvAdapter = new DogsRecyclerViewAdapter(dogList);
         recyclerView.setAdapter(rvAdapter);
     }
