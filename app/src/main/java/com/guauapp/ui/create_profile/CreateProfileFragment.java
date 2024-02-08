@@ -87,7 +87,7 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         createCarousel();
 
         mStrorage = FirebaseStorage.getInstance().getReference();
-        binding.btnAddPhoto.setOnClickListener(this::addPhoto);
+        binding.floatbtn.setOnClickListener(this::addPhoto);
 
     }
 
