@@ -22,6 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guauapp.DogsRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.databinding.FragmentHomeBinding;
@@ -41,7 +42,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
     private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
-    private FragmentHomeBinding binding;
     private View dialogView;
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
@@ -66,8 +66,6 @@ public class HomeFragment extends Fragment {
         fab= binding.fabFiltros;
         fab.setOnClickListener(view -> mostrardialogoPersonalizado());
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

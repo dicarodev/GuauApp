@@ -60,15 +60,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-    private void configureFirebase() {
-        mAuth = FirebaseAuth.getInstance();
-        signInButton = findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(this::signIn);
-        signInButton.setVisibility(View.VISIBLE);
-    }
-
-        navView.setItemIconTintList(null);
-    }
-
-
 }
