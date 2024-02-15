@@ -1,6 +1,7 @@
 package com.guauapp.carousel;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +15,24 @@ import com.guauapp.R;
 
 import java.util.ArrayList;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
+public class ImageProfileAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     Context context;
-    ArrayList<String> arrayList;
+    ArrayList<Bitmap> arrayList;
 
-    public ImageAdapter(Context context, ArrayList<String> arrayList){
+    public ImageProfileAdapter(Context context, ArrayList<Bitmap> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.image_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ImageAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(arrayList.get(position)).into(holder.imageView);
     }
 
@@ -48,4 +49,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
             imageView = itemView.findViewById(R.id.list_item_image);
         }
     }
+
+
 }
