@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,17 +22,17 @@ import com.guauapp.model.DogsDAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;  // Objeto de enlace para el diseño de HomeFragment
     private NavController navController;
-    private List<Dog> dogList = new ArrayList<>();  // Lista para almacenar nombres de perros
+    private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private DogsDAO dogsDAO = new DogsDAO();
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
     private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
+    public static Dog selectedDog = null; // Perro seleccionado en el RecyclerView
 
 
     // Este método se llama cuando se crea el fragmento
@@ -55,7 +54,17 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-        configureRecyclerView();  // Configura y prepara el RecyclerView
+
+        getDogs();
+        //configureRecyclerView();  // Configura y prepara el RecyclerView
+    }
+
+    public void getDogs() {
+        dogsDAO.getDogsAsync().thenAccept(dogs -> {
+            dogsList.clear();
+            dogs.forEach(dog -> dogsList.add(dog));
+            configureRecyclerView();
+        });
     }
 
     // Método para configurar y preparar el RecyclerView
@@ -67,7 +76,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
-        rvAdapter = new DogsRecyclerViewAdapter(dogList);
+        rvAdapter = new DogsRecyclerViewAdapter(dogsList);
         recyclerView.setAdapter(rvAdapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
@@ -78,9 +87,14 @@ public class HomeFragment extends Fragment {
 
                 if (child != null && position != RecyclerView.NO_POSITION) {
                     // Obtener el perro
-                    Dog dogProfile = dogList.get(position);
+                    selectedDog = dogsList.get(position);
 
-                    navController.navigate(R.id.navigation_profile);
+                    // Crear un Bundle para enviar datos al FriendFragment
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("selectedDog", selectedDog);
+
+                    // Navegar al FriendFragment con el Bundle
+                    navController.navigate(R.id.navigation_friend, bundle);
                 }
 
                 return false;
@@ -105,7 +119,4 @@ public class HomeFragment extends Fragment {
         binding = null;  // Establece el objeto de enlace como nulo para evitar pérdidas de memoria
     }
 
-    public void cardOnClick() {
-
-    }
 }

@@ -4,8 +4,8 @@
     android:id="@+id/cardView_dog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="16dp"
     app:cardBackgroundColor="@color/brown_light"
+    app:cardCornerRadius="16dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="16dp">
@@ -19,8 +19,7 @@
             android:id="@+id/img_cardImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/descarga" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/txv_cardName"
@@ -68,15 +67,6 @@
                 android:text="Golden Retriever"
                 android:textSize="16dp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_cardViewProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ver Perfil"
-            android:backgroundTint="@color/brown_dark"
-            android:textColor="@android:color/white" />
 
     </LinearLayout>
 

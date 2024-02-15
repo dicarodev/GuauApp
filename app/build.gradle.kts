@@ -52,6 +52,7 @@ dependencies {
 
     //Implementacion para cambiar las fotos al crear el perfil
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
 
