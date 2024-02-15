@@ -1,14 +1,14 @@
-package com.guauapp.ui.chat;
+package com.guauapp.ui.create_profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ChatViewModel extends ViewModel {
+public class CreateProfileViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public ChatViewModel() {
+    public CreateProfileViewModel() {
         mText = new MutableLiveData<>();
     }
 
