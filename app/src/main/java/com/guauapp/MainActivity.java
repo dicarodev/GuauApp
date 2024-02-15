@@ -71,10 +71,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-    public void pepe(){
-
-    }
-
     private void configureFirebase() {
         mAuth = FirebaseAuth.getInstance();
         signInButton = findViewById(R.id.signInButton);
