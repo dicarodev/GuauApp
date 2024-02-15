@@ -46,7 +46,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
 
     private static final int GALLERY_INTENT = 1;
     private FragmentCreateProfileBinding binding;
-    private String storagePath = "img/*";
     private StorageReference mStrorage;
     private DogsDAO dogsDAO;
     private RecyclerView imgRecyclerView;
@@ -56,8 +55,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
     private ArrayList<String> userImages;
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         CreateProfileViewModel createProfileViewModel =
@@ -87,7 +84,7 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         createCarousel();
 
         mStrorage = FirebaseStorage.getInstance().getReference();
-        binding.btnAddPhoto.setOnClickListener(this::addPhoto);
+        binding.floatbtn.setOnClickListener(this::addPhoto);
 
     }
 
@@ -122,17 +119,7 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
     private void insertPhotosIntoStorage() {
         for(StorageReference filePath : photosReferences.keySet()) {
             userImages.add(filePath.getPath());
-            filePath.putFile(photosReferences.get(filePath)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getContext(), "Foto subida exitosamente", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "Error al subir la foto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            filePath.putFile(photosReferences.get(filePath));
         }
 
     }
@@ -198,6 +185,7 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
                             castrated,
                             userImages);
         addDog(dog);
+        enableBottomBar(true);
         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_home);
     }
 
@@ -213,8 +201,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         String key = mDatabase.child("dogs").push().getKey();
         FirebaseUser user = LogInFragment.user;
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
-        mDatabase.child("dogs").child(user.getUid()).setValue(dog)
-                .addOnSuccessListener(unused -> Toast.makeText(getContext(), "Perro añadido", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Fallo: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        mDatabase.child("dogs").child(user.getUid()).setValue(dog);
     }
 }
