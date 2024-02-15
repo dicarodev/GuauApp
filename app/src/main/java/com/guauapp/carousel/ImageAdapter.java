@@ -48,6 +48,4 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
             imageView = itemView.findViewById(R.id.list_item_image);
         }
     }
-
-
 }

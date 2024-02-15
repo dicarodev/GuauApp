@@ -6,24 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
-import com.guauapp.carousel.ImageAdapter;
 import com.guauapp.carousel.ImageProfileAdapter;
 import com.guauapp.databinding.FragmentProfileBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
-import com.guauapp.ui.chat.ChatViewModel;
 import com.guauapp.ui.logIn.LogInFragment;
 
 import java.io.File;
@@ -32,11 +24,10 @@ import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
-    DogsDAO dogsDAO;
-    Dog dog;
+    private DogsDAO dogsDAO;
+    private Dog dog;
     private ArrayList<Bitmap> photosList;
     private ImageProfileAdapter adapter;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

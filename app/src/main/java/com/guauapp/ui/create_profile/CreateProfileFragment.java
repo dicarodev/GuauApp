@@ -46,7 +46,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
 
     private static final int GALLERY_INTENT = 1;
     private FragmentCreateProfileBinding binding;
-    private String storagePath = "img/*";
     private StorageReference mStrorage;
     private DogsDAO dogsDAO;
     private RecyclerView imgRecyclerView;
@@ -56,8 +55,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
     private ArrayList<String> userImages;
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         CreateProfileViewModel createProfileViewModel =
