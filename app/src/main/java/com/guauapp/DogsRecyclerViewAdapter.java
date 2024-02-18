@@ -1,5 +1,6 @@
 package com.guauapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guauapp.model.Dog;
+import com.guauapp.ui.chat.ChatActivity;
 
 import java.util.List;
 
@@ -73,6 +75,12 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
         holder.getTxtNameDog().setText(dog.getDog_name());
         holder.getTxtLocationDog().setText(dog.getLocation());
         holder.getTxtBreedDog().setText(dog.getBreed());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ChatActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
