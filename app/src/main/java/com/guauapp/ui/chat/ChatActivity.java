@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.guauapp.ChatRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.model.ChatDAO;
@@ -32,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatDAO = new ChatDAO();
-        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), "voRg5d6HDXMXVIdzX0OHYvR094Q2");
+        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), "j9A1HUxBmDhgYIj4F0euK1HfvDh2");
 
         chat_messageInput = findViewById(R.id.chat_messageInput);
         btn_sendMessage = findViewById(R.id.btn_sendMessage);
@@ -61,12 +62,17 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadChatMessages() {
         chatDAO.getChatMessagesAsync(chatroomId).thenAccept(chatMessageList -> {
-            // Aquí actualizas el RecyclerViewAdapter con la lista de mensajes recuperados
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setStackFromEnd(true);
-            chatMessages_recyclerView.setLayoutManager(layoutManager);
-            chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(chatMessageList);
-            chatMessages_recyclerView.setAdapter(chatRecyclerViewAdapter);
+            if (chatRecyclerViewAdapter == null) {
+                // Si el adaptador es nulo, crea uno nuevo y configura el RecyclerView
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                layoutManager.setStackFromEnd(true);
+                chatMessages_recyclerView.setLayoutManager(layoutManager);
+                chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(chatMessageList);
+                chatMessages_recyclerView.setAdapter(chatRecyclerViewAdapter);
+            } else {
+                // Si el adaptador ya existe, actualiza los datos
+                chatRecyclerViewAdapter.updateData(chatMessageList);
+            }
         });
     }
 
@@ -79,7 +85,7 @@ public class ChatActivity extends AppCompatActivity {
                 if (chatroom == null) {
                     chatroom = new Chatroom(
                             chatroomId,
-                            Arrays.asList(LogInFragment.user.getUid(), "voRg5d6HDXMXVIdzX0OHYvR094Q2"),
+                            Arrays.asList(LogInFragment.user.getUid(), "j9A1HUxBmDhgYIj4F0euK1HfvDh2"),
                             System.currentTimeMillis(),
                             ""
                     );

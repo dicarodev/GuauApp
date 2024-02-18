@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,10 +54,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         configureRecyclerView();  // Configura y prepara el RecyclerView
+
     }
+
 
     // Método para configurar y preparar el RecyclerView
     private void configureRecyclerView() {
@@ -67,10 +69,14 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
-        rvAdapter = new DogsRecyclerViewAdapter(dogList);
-        recyclerView.setAdapter(rvAdapter);
+        dogsDAO.getDogsAsync().thenAccept(dogs ->{
+            dogList = dogs;
+            rvAdapter = new DogsRecyclerViewAdapter(dogList);
+            recyclerView.setAdapter(rvAdapter);
+        });
 
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+
+        /*recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
@@ -95,7 +101,7 @@ public class HomeFragment extends Fragment {
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
-        });
+        });*/
     }
 
     // Este método se llama cuando el fragmento está a punto de ser destruido
