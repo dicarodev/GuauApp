@@ -162,8 +162,10 @@ public class LogInFragment extends Fragment {
             if(dogList.contains(user.getUid())) {
                 enableBottomBar(true);
                 navController.navigate(R.id.navigation_home);
+                navView.setVisibility(View.VISIBLE);
             }else{
-                navController.navigate(R.id.navigation_profile);
+                navController.navigate(R.id.navigation_create_profile);
+                navView.setVisibility(View.VISIBLE);
             }
 
             signInButton.setVisibility(View.GONE);

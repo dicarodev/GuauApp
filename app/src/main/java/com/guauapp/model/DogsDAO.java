@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class DogsDAO {
                 }
                 future.complete(provinceList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -50,6 +52,7 @@ public class DogsDAO {
                 }
                 future.complete(breedList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -70,6 +73,48 @@ public class DogsDAO {
                 }
                 future.complete(dogsList);
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return future;
+    }
+
+    // Obetener los perros
+    public CompletableFuture<List<Dog>> getDogsAsync() {
+        List<Dog> dogsList = new ArrayList<>();
+        CompletableFuture<List<Dog>> future = new CompletableFuture<>();
+        mDatabase.child("dogs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Dog dog = productSnapshot.getValue(Dog.class);
+                    dogsList.add(dog);
+                }
+                future.complete(dogsList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return future;
+    }
+
+    // Obetener perro por id
+    public CompletableFuture<Dog> getDogByIdAsync(String id) {
+        CompletableFuture<Dog> future = new CompletableFuture<>();
+        mDatabase.getDatabase().getReference("dogs").orderByChild("id").equalTo(id).
+                addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Dog dog = productSnapshot.getValue(Dog.class);
+                    future.complete(dog);
+                }
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

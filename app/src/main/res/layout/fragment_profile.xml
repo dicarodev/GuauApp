@@ -1,174 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ctr_bg"
     tools:context=".ui.profile.ProfileFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="#95000000"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            android:id="@+id/collapsing_toolbar"
+            android:background="@drawable/ctr_bg">
 
-    <ScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|end"
+                android:orientation="horizontal"
+                android:scaleType="centerCrop"
+                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:background="@drawable/layout_bg"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/txv_owenerName"
-                android:layout_width="215dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                android:ems="10"
-                android:hint="Nombre dueño"
-                android:inputType="text"
-                android:maxLength="20"
-                android:maxLines="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_dogName" />
-
-            <Spinner
-                android:id="@+id/spn_cities"
-                android:layout_width="210dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spn_province" />
-
-            <Button
-                android:id="@+id/btn_addDog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="80dp"
-                android:text="Añadir perro"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch1" />
-
-            <Spinner
-                android:id="@+id/spn_province"
-                android:layout_width="210dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spn_breed" />
-
-            <Spinner
-                android:id="@+id/spn_breed"
-                android:layout_width="210dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_owenerName" />
-
-            <EditText
-                android:id="@+id/txv_dogName"
-                android:layout_width="215dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="50dp"
-                android:ems="10"
-                android:hint="Nombre perro"
-                android:inputType="text"
-                android:maxLength="20"
-                android:maxLines="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="253dp"
-                android:layout_height="133dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="50dp"
-                android:src="@drawable/descarga"
+            <View
+                android:id="@+id/line1"
+                android:layout_width="50dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:background="#787777"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/txv_descrption"
-                android:layout_width="344dp"
-                android:layout_height="148dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Descripcion"
-                android:inputType="textMultiLine"
-                android:maxLength="200"
+            <TextView
+                android:id="@+id/txv_profile_dogName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:hint="Dog name"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spn_cities" />
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_dogName" />
 
-            <Switch
-                android:id="@+id/switch1"
+            <TextView
+                android:id="@+id/txv_profile_breed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Castrado"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="24dp"
+                android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_descrption" />
+                app:layout_constraintTop_toBottomOf="@+id/line" />
 
-            <RadioGroup
+            <TextView
+                android:id="@+id/txv_profile_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/switch1"
-                android:orientation='horizontal'
-                app:layout_constraintTop_toBottomOf="@+id/txv_descrption">
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_breed" />
 
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cachorro" />
+            <TextView
+                android:id="@+id/txv_profile_castrated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_age" />" />
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Adulto" />
+            <TextView
+                android:id="@+id/txv_profile_province"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_castrated" />
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Senior" />
-            </RadioGroup>
+            <TextView
+                android:id="@+id/txv_profile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_province" />
+
+            <TextView
+                android:id="@+id/txv_profile_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_location" />
+
+            <TextView
+                android:id="@+id/txv_profile_ownerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="40dp"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@+id/txv_profile_dogName"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "968948311369-f6b9rge65e2lvpn6jd0l9gun015iiovc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guauapp",
+            "certificate_hash": "a546d4e935ddf40f9b5a27f0798f2f8025b5b9d6"
+          }
+        },
+        {
+          "client_id": "968948311369-ig9efo5fvjeho5fdc1l6b349icj93e12.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guauapp",
+            "certificate_hash": "d19cee473c94744a410d4e6729df591d4346fb57"
+          }
+        },
+        {
           "client_id": "968948311369-n19lfv4i4b1eg6oioltq9jv3bvaiajnn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
