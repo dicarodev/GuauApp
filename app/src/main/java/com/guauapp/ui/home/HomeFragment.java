@@ -83,33 +83,6 @@ public class HomeFragment extends Fragment {
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
         rvAdapter = new DogsRecyclerViewAdapter(dogsList, navController);
         recyclerView.setAdapter(rvAdapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                int position = rv.getChildAdapterPosition(child);
-
-                if (child != null && position != RecyclerView.NO_POSITION) {
-                    // Obtener el perro
-                    Dog dogProfile = dogsList.get(position);
-
-                    navController.navigate(R.id.navigation_profile);
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     // Este método se llama cuando el fragmento está a punto de ser destruido
