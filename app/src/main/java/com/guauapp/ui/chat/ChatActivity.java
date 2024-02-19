@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.guauapp.ChatRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.model.ChatDAO;
@@ -73,6 +77,27 @@ public class ChatActivity extends AppCompatActivity {
                 // Si el adaptador ya existe, actualiza los datos
                 chatRecyclerViewAdapter.updateData(chatMessageList);
             }
+
+            chatDAO.getChatroomMessageReference(chatroomId).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    // Nuevo mensaje agregado
+                    ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
+                    chatRecyclerViewAdapter.addData();
+                    // Desplazar a la última posición
+                    chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
+                }
+
+                // Otros métodos de ChildEventListener...
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
         });
     }
 
