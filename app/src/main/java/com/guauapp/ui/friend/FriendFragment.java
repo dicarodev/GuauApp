@@ -1,5 +1,6 @@
 package com.guauapp.ui.friend;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ import com.guauapp.carousel.ImageProfileAdapter;
 import com.guauapp.databinding.FragmentFriendBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
+import com.guauapp.ui.chat.ChatActivity;
 import com.guauapp.ui.home.HomeFragment;
 
 import java.io.File;
@@ -70,6 +72,10 @@ public class FriendFragment extends Fragment {
             public void onClick(View view) {
 
                 //AQUI SE ABRE EL CHAT CON EL USUARIO SELECCIONADO EN EL FRAGMENTO
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("selectedUser", selectedDog);
+                getContext().startActivity(intent);
 
             }
         });
