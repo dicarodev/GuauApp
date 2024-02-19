@@ -62,7 +62,11 @@ public class HomeFragment extends Fragment {
     public void getDogs() {
         dogsDAO.getDogsAsync().thenAccept(dogs -> {
             dogsList.clear();
-            dogs.forEach(dog -> dogsList.add(dog));
+            dogs.forEach(dog -> {
+//                if (dog.getDog_name().equalsIgnoreCase("rex")) {
+                dogsList.add(dog);
+//                }
+            });
             configureRecyclerView();
         });
     }
@@ -76,40 +80,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
-        rvAdapter = new DogsRecyclerViewAdapter(dogsList);
+        rvAdapter = new DogsRecyclerViewAdapter(dogsList, navController);
         recyclerView.setAdapter(rvAdapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                int position = rv.getChildAdapterPosition(child);
-
-                if (child != null && position != RecyclerView.NO_POSITION) {
-                    // Obtener el perro
-                    selectedDog = dogsList.get(position);
-
-                    // Crear un Bundle para enviar datos al FriendFragment
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("selectedDog", selectedDog);
-
-                    // Navegar al FriendFragment con el Bundle
-                    navController.navigate(R.id.navigation_friend, bundle);
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     // Este método se llama cuando el fragmento está a punto de ser destruido
