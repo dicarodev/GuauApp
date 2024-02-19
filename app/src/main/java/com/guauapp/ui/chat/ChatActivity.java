@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.guauapp.ChatRecyclerViewAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.guauapp.adapter.ChatRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.model.ChatDAO;
 import com.guauapp.model.ChatMessage;
@@ -67,12 +72,38 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadChatMessages() {
         chatDAO.getChatMessagesAsync(chatroomId).thenAccept(chatMessageList -> {
-            // Aquí actualizas el RecyclerViewAdapter con la lista de mensajes recuperados
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setStackFromEnd(true);
-            chatMessages_recyclerView.setLayoutManager(layoutManager);
-            chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(chatMessageList);
-            chatMessages_recyclerView.setAdapter(chatRecyclerViewAdapter);
+            if (chatRecyclerViewAdapter == null) {
+                // Si el adaptador es nulo, crea uno nuevo y configura el RecyclerView
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                layoutManager.setStackFromEnd(true);
+                chatMessages_recyclerView.setLayoutManager(layoutManager);
+                chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(chatMessageList);
+                chatMessages_recyclerView.setAdapter(chatRecyclerViewAdapter);
+            } else {
+                // Si el adaptador ya existe, actualiza los datos
+                chatRecyclerViewAdapter.updateData(chatMessageList);
+            }
+
+            chatDAO.getChatroomMessageReference(chatroomId).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    // Nuevo mensaje agregado
+                    ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
+                    chatRecyclerViewAdapter.addData();
+                    // Desplazar a la última posición
+                    chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
+                }
+
+                // Otros métodos de ChildEventListener...
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
         });
     }
 

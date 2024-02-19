@@ -1,31 +1,25 @@
 package com.guauapp.ui.friend;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.guauapp.R;
-import com.guauapp.carousel.ImageProfileAdapter;
+import com.guauapp.adapter.ImageProfileAdapter;
 import com.guauapp.databinding.FragmentFriendBinding;
 import com.guauapp.model.Dog;
-import com.guauapp.model.DogsDAO;
 import com.guauapp.ui.chat.ChatActivity;
-import com.guauapp.ui.home.HomeFragment;
 
 import java.io.File;
 import java.io.IOException;
