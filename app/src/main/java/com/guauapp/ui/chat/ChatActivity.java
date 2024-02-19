@@ -1,5 +1,6 @@
 package com.guauapp.ui.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import com.guauapp.R;
 import com.guauapp.model.ChatDAO;
 import com.guauapp.model.ChatMessage;
 import com.guauapp.model.Chatroom;
+import com.guauapp.model.Dog;
 import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.Arrays;
@@ -30,6 +32,7 @@ public class ChatActivity extends AppCompatActivity {
     ChatDAO chatDAO;
     Chatroom chatroom;
     String chatroomId;
+    Dog selectedDog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,10 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatDAO = new ChatDAO();
-        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), "j9A1HUxBmDhgYIj4F0euK1HfvDh2");
+
+        selectedDog = (Dog) getIntent().getExtras().get("selectedUser");
+
+        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), selectedDog.getId());
 
         chat_messageInput = findViewById(R.id.chat_messageInput);
         btn_sendMessage = findViewById(R.id.btn_sendMessage);
@@ -110,7 +116,7 @@ public class ChatActivity extends AppCompatActivity {
                 if (chatroom == null) {
                     chatroom = new Chatroom(
                             chatroomId,
-                            Arrays.asList(LogInFragment.user.getUid(), "j9A1HUxBmDhgYIj4F0euK1HfvDh2"),
+                            Arrays.asList(LogInFragment.user.getUid(), selectedDog.getId()),
                             System.currentTimeMillis(),
                             ""
                     );
