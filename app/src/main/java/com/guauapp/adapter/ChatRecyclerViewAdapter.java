@@ -1,4 +1,4 @@
-package com.guauapp;
+package com.guauapp.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.guauapp.R;
 import com.guauapp.model.ChatMessage;
 import com.guauapp.ui.logIn.LogInFragment;
 
@@ -68,6 +69,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         this.chatMessageList = chatMessageList;
         notifyDataSetChanged();
     }
+
     public void addData() {
         notifyDataSetChanged();
     }
