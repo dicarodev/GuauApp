@@ -169,8 +169,7 @@ public class LogInFragment extends Fragment {
 
     public void updateUI(FirebaseUser user) {
         if (user != null) {
-            Toast.makeText(this.requireContext(), "Bienvenido " + user.getDisplayName()
-                    + "[" + user.getEmail() + "]", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.requireContext(), "Bienvenido " + user.getDisplayName(), Toast.LENGTH_LONG).show();
             LogInFragment.user = user;
             if(dogList.contains(user.getUid())) {
                 enableBottomBar(true);
