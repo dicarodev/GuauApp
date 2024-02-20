@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+
     // Método para configurar y preparar el RecyclerView
     private void configureRecyclerView() {
         recyclerView = binding.recyclerViewDogs;  // Obtiene la referencia al RecyclerView desde el enlace
@@ -82,7 +83,6 @@ public class HomeFragment extends Fragment {
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
         rvAdapter = new DogsRecyclerViewAdapter(dogsList, navController);
         recyclerView.setAdapter(rvAdapter);
-
     }
 
     // Este método se llama cuando el fragmento está a punto de ser destruido
