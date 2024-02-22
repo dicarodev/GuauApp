@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
 
         getDogs();
-        //configureRecyclerView();  // Configura y prepara el RecyclerView
     }
 
     public void getDogs() {

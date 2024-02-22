@@ -121,9 +121,6 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
                 }
             });
 
-        } else {
-            // Si no hay imágenes, mostrar la imagen predeterminada
-//            holder.getImgDog().setImageResource(R.drawable.image_not_found);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -149,13 +146,4 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
         notifyDataSetChanged();
     }
 
-    // Método que devuelve la URL de la primera imagen del perro, o null si no hay imágenes
-    private String getFirstImage(Dog dog) {
-        List<String> images = dog.getImages();
-        if (images != null && !images.isEmpty()) {
-            return images.get(0); // Devuelve la primera imagen
-        } else {
-            return null; // No hay imágenes disponibles
-        }
-    }
 }
