@@ -22,17 +22,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.guauapp.R;
-import com.guauapp.carousel.ImageAdapter;
+import com.guauapp.adapter.ImageAdapter;
 import com.guauapp.databinding.FragmentCreateProfileBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
@@ -79,7 +76,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         setProvinces();
         setBreeds();
         enableBottomBar(false);
-
         imgRecyclerView = binding.recyclerView;
         createCarousel();
 

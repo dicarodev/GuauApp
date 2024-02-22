@@ -32,17 +32,19 @@ import com.guauapp.model.Province;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private FragmentHomeBinding binding;  // Objeto de enlace para el diseño de HomeFragment
     private NavController navController;
-    private List<Dog> dogList = new ArrayList<>();  // Lista para almacenar nombres de perros
+    private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private List<Dog> filteredDogList = new ArrayList<>();// Lista para almacenar perros filtrados
     private DogsDAO dogsDAO = new DogsDAO();
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
     private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
+    public static Dog selectedDog = null; // Perro seleccionado en el RecyclerView
     private View dialogView;
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
@@ -63,6 +65,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                              ViewGroup container, Bundle savedInstanceState) {
         // Crea una instancia de HomeViewModel utilizando ViewModelProvider
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         // Infla el diseño para este fragmento usando enlace de datos
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -82,9 +85,25 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onStart() {
         super.onStart();
+
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-        configureRecyclerView();  // Configura y prepara el RecyclerView
+
+        getDogs();
+        //configureRecyclerView();  // Configura y prepara el RecyclerView
     }
+
+    public void getDogs() {
+        dogsDAO.getDogsAsync().thenAccept(dogs -> {
+            dogsList.clear();
+            dogs.forEach(dog -> {
+//                if (dog.getDog_name().equalsIgnoreCase("rex")) {
+                dogsList.add(dog);
+//                }
+            });
+            configureRecyclerView();
+        });
+    }
+
 
     // Método para configurar y preparar el RecyclerView
     private void configureRecyclerView() {
@@ -95,35 +114,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         recyclerView.setLayoutManager(rvLayoutManager);
 
         // Crea un adaptador para el RecyclerView y establece el adaptador en el RecyclerView
-        rvAdapter = new DogsRecyclerViewAdapter(dogList);
+        rvAdapter = new DogsRecyclerViewAdapter(dogsList, navController);
         recyclerView.setAdapter(rvAdapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                int position = rv.getChildAdapterPosition(child);
-
-                if (child != null && position != RecyclerView.NO_POSITION) {
-                    // Obtener el perro
-                    Dog dogProfile = dogList.get(position);
-
-                    navController.navigate(R.id.navigation_profile);
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     // Este método se llama cuando el fragmento está a punto de ser destruido

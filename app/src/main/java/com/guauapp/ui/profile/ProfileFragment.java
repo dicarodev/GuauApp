@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.guauapp.carousel.ImageProfileAdapter;
+import com.guauapp.adapter.ImageProfileAdapter;
 import com.guauapp.databinding.FragmentProfileBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;

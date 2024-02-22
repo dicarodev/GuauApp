@@ -1,4 +1,4 @@
-package com.guauapp.carousel;
+package com.guauapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
