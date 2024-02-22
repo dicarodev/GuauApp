@@ -1,5 +1,7 @@
 package com.guauapp.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -12,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class DogsDAO {
     DatabaseReference mDatabase;
@@ -107,18 +110,34 @@ public class DogsDAO {
         CompletableFuture<Dog> future = new CompletableFuture<>();
         mDatabase.getDatabase().getReference("dogs").orderByChild("id").equalTo(id).
                 addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    Dog dog = productSnapshot.getValue(Dog.class);
-                    future.complete(dog);
-                }
-            }
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                            Dog dog = productSnapshot.getValue(Dog.class);
+                            future.complete(dog);
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
         return future;
     }
+
+    public CompletableFuture<List<Dog>> getFilteredDogsAsync(CompletableFuture<List<Dog>> allDogsFuture, String raza, String edad, String castrado, String provincia, String localidad) {
+        return allDogsFuture.thenApplyAsync(allDogs ->
+                allDogs.stream()
+                        .filter(dog -> (raza.isEmpty() || raza.equals(dog.getBreed()))
+                                && (edad.isEmpty() || edad.equals(dog.getAge()))
+                                && (castrado.isEmpty() || castrado.equals(String.valueOf(dog.getCastrated())))
+                                && (provincia.isEmpty() || provincia.equals(dog.getProvince()))
+                                && (localidad.isEmpty() || localidad.equals(dog.getLocation())))
+                        .collect(Collectors.toList())
+        );
+    }
+
+
+
 }
+

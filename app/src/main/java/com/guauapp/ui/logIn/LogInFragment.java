@@ -2,7 +2,9 @@ package com.guauapp.ui.logIn;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +54,7 @@ public class LogInFragment extends Fragment {
     private DogsDAO dogsDAO = new DogsDAO();
     private List<String> dogList = new ArrayList<>();
     public static FirebaseUser user;
+    SharedPreferences sharedPreferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -66,7 +69,9 @@ public class LogInFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         configureFirebase();
+
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navView = requireActivity().findViewById(R.id.nav_view);
@@ -80,6 +85,10 @@ public class LogInFragment extends Fragment {
         enableBottomBar(false);
 
         setDogList();
+        if(sharedPreferences.contains("ID_TOKEN")){
+            String token = sharedPreferences.getString("ID_TOKEN", "");
+            firebaseAuthWithGoogle(token);
+        }
     }
 
     @Override
@@ -123,6 +132,10 @@ public class LogInFragment extends Fragment {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("ID_TOKEN", account.getIdToken());
+                editor.apply();
                 //lanzarActividad();
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -156,8 +169,7 @@ public class LogInFragment extends Fragment {
 
     public void updateUI(FirebaseUser user) {
         if (user != null) {
-            Toast.makeText(this.requireContext(), "Bienvenido " + user.getDisplayName()
-                    + "[" + user.getEmail() + "]", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.requireContext(), "Bienvenido " + user.getDisplayName(), Toast.LENGTH_LONG).show();
             LogInFragment.user = user;
             if(dogList.contains(user.getUid())) {
                 enableBottomBar(true);

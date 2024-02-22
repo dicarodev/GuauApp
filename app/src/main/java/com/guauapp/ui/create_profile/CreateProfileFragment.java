@@ -76,7 +76,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         setProvinces();
         setBreeds();
         enableBottomBar(false);
-
         imgRecyclerView = binding.recyclerView;
         createCarousel();
 
