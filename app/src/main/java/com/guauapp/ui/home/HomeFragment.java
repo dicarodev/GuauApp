@@ -161,7 +161,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         rvAdapter = new DogsRecyclerViewAdapter(filteredDogList);
         recyclerView.setAdapter(rvAdapter);
         dialogFilter.dismiss();
-
     }
 
     private void deleteFilterListener(View view) {
