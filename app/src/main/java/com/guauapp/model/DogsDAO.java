@@ -125,19 +125,19 @@ public class DogsDAO {
         return future;
     }
 
-    public CompletableFuture<List<Dog>> getFilteredDogsAsync(CompletableFuture<List<Dog>> allDogsFuture, String raza, String edad, String castrado, String provincia, String localidad) {
-        return allDogsFuture.thenApplyAsync(allDogs ->
-                allDogs.stream()
-                        .filter(dog -> (raza.isEmpty() || raza.equals(dog.getBreed()))
-                                && (edad.isEmpty() || edad.equals(dog.getAge()))
-                                && (castrado.isEmpty() || castrado.equals(String.valueOf(dog.getCastrated())))
-                                && (provincia.isEmpty() || provincia.equals(dog.getProvince()))
-                                && (localidad.isEmpty() || localidad.equals(dog.getLocation())))
-                        .collect(Collectors.toList())
-        );
+    public List<Dog>getfilterListDog(List<Dog> allDogs,String gender, String raza, String edad, String castrado, String provincia, String localidad) {
+        List<Dog> filterDogList=new ArrayList<>();
+        for (Dog dog:allDogs) {
+            if (raza.isEmpty() || raza.equalsIgnoreCase(dog.getBreed())
+                    && (edad.isEmpty() || edad.equalsIgnoreCase(dog.getAge()))
+                    //&& (gender.isEmpty()|| gender.equalsIgnoreCase(dog.getGeder()))
+                    && (castrado.isEmpty() || castrado.equalsIgnoreCase(String.valueOf(dog.getCastrated())))
+                    && (provincia.isEmpty() || provincia.equalsIgnoreCase(dog.getProvince()))
+                    && (localidad.isEmpty() || localidad.equalsIgnoreCase(dog.getLocation()))) {
+                filterDogList.add(dog);
+            }
+        }
+        return filterDogList;
     }
-
-
-
 }
 

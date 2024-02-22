@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,8 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.R;
+import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
@@ -32,7 +31,6 @@ import com.guauapp.model.Province;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -40,6 +38,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private NavController navController;
     private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private List<Dog> filteredDogList = new ArrayList<>();// Lista para almacenar perros filtrados
+    private List<Dog> allDogs = new ArrayList<>();
     private DogsDAO dogsDAO = new DogsDAO();
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
@@ -100,13 +99,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 dogsList.add(dog);
 //                }
             });
-            configureRecyclerView();
+            configureRecyclerView(dogsList);
         });
     }
 
 
     // Método para configurar y preparar el RecyclerView
-    private void configureRecyclerView() {
+    private void configureRecyclerView(List<Dog> dogsList) {
         recyclerView = binding.recyclerViewDogs;  // Obtiene la referencia al RecyclerView desde el enlace
 
         // Crea un LinearLayoutManager para el RecyclerView
@@ -151,16 +150,31 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     private void filterListener(View view) {
         String raza = spinner_raza.getSelectedItem().toString();
-
         int id_genero = rg_genero.getCheckedRadioButtonId();
+        String gender;
+        if (id_genero == 0) {
+            gender = "Macho";
+        } else {
+            gender = "Hembra";
+        }
+
+
         String edad = spinner_edad.getSelectedItem().toString();
         String provincia = spinner_provincia.getSelectedItem().toString();
         String localidad = spinner_localidad.getSelectedItem().toString();
         boolean castrado = switch_castrado.isChecked();
         String castradoStr = castrado ? "true" : "false";
-        rvAdapter = new DogsRecyclerViewAdapter(filteredDogList);
-        recyclerView.setAdapter(rvAdapter);
-        dialogFilter.dismiss();
+
+        dogsDAO.getDogsAsync().thenAccept(dogs -> {
+            allDogs.clear();
+            allDogs.addAll(dogs);
+            filteredDogList = dogsDAO.getfilterListDog(allDogs,gender, raza, edad, castradoStr, provincia, localidad);
+            configureRecyclerView(filteredDogList);
+
+            dialogFilter.dismiss();
+
+        });
+
     }
 
     private void deleteFilterListener(View view) {
