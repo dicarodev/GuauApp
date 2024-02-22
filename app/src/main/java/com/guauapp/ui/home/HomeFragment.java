@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.guauapp.DogsRecyclerViewAdapter;
+import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.databinding.FragmentHomeBinding;
 import com.guauapp.model.Dog;
