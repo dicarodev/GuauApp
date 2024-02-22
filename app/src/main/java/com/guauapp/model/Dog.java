@@ -10,6 +10,7 @@ public class Dog implements Serializable {
         private String province;
         private String location;
         private String description;
+        private String gender;
         private String age;
         private String castrated;
         private ArrayList<String> images;
@@ -108,4 +109,5 @@ public class Dog implements Serializable {
         public void setImages(ArrayList<String> images) {
                 this.images = images;
         }
+
 }
