@@ -172,6 +172,12 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         } else if (binding.rdSenior.isChecked()) {
             age = "Senior";
         }
+        String gender = null;
+        if (binding.rdMale.isChecked()) {
+            gender = "Adulto";
+        } else if (binding.rdFemale.isChecked()) {
+            gender = "Cachorro";
+        }
         insertPhotosIntoStorage();
         Dog dog = new Dog(LogInFragment.user.getUid(),
                             dogName.getText().toString(),
@@ -182,7 +188,8 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
                             descrption.getText().toString(),
                             age,
                             castrated,
-                            userImages);
+                            userImages,
+                            gender);
         addDog(dog);
         enableBottomBar(true);
         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_home);
