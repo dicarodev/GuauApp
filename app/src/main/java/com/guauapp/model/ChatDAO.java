@@ -55,7 +55,4 @@ public class ChatDAO {
         });
         return future;
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.guauapp.carousel;
+package com.guauapp.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.guauapp.R;
+import com.guauapp.adapter.ImageAdapter;
 
 import java.util.ArrayList;
 
