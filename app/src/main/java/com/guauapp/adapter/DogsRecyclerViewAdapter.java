@@ -123,7 +123,7 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
 
         } else {
             // Si no hay imágenes, mostrar la imagen predeterminada
-            holder.getImgDog().setImageResource(R.drawable.image_not_found);
+//            holder.getImgDog().setImageResource(R.drawable.image_not_found);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -63,9 +63,7 @@ public class HomeFragment extends Fragment {
         dogsDAO.getDogsAsync().thenAccept(dogs -> {
             dogsList.clear();
             dogs.forEach(dog -> {
-//                if (dog.getDog_name().equalsIgnoreCase("rex")) {
                 dogsList.add(dog);
-//                }
             });
             configureRecyclerView();
         });
