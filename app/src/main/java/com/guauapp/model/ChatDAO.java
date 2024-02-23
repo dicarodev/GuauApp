@@ -55,4 +55,26 @@ public class ChatDAO {
         });
         return future;
     }
+
+    public CompletableFuture<List<Chatroom>> getChatroomsAsync(String userId) {
+        List<Chatroom> chatroomList = new ArrayList<>();
+        CompletableFuture<List<Chatroom>> future = new CompletableFuture<>();
+        mDatabase.child("chatrooms").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatroomList.clear(); // Limpiar la lista antes de agregar los nuevos mensajes
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    Chatroom chatroom = productSnapshot.getValue(Chatroom.class);
+                    if (chatroom.getUsersId().contains(userId)) {
+                        chatroomList.add(chatroom);
+                    }
+                }
+                future.complete(chatroomList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return future;
+    }
 }
