@@ -56,6 +56,7 @@ public class ChatFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        //bn
     }
 
     private void getUsers(){
