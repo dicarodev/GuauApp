@@ -115,10 +115,10 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 // Nuevo mensaje agregado
                 ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
-                /*if (!loadedMessageIds.contains(String.valueOf(newMessage.getTimestamp()))) {
+                if (!loadedMessageIds.contains(String.valueOf(newMessage.getTimestamp()))) {
                     loadedMessageIds.add(String.valueOf(newMessage.getTimestamp())); // Agregar el ID del mensaje cargado
 
-                    if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
+                    /*if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
 
                         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -141,8 +141,8 @@ public class ChatActivity extends AppCompatActivity {
                         }
                         notificationManager.notify(notificationId, notificationBuilder.build());
                         notificationId++;
-                    }
-                }*/
+                    }*/
+                }
                 chatRecyclerViewAdapter.addData();
                 // Desplazar a la última posición
                 chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
