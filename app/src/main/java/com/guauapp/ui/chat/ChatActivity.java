@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,6 +68,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         btn_sendMessage.setOnClickListener(v -> {
             String message = chat_messageInput.getText().toString().trim();
 
@@ -113,14 +115,15 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 // Nuevo mensaje agregado
                 ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
-
                 if (!loadedMessageIds.contains(String.valueOf(newMessage.getTimestamp()))) {
                     loadedMessageIds.add(String.valueOf(newMessage.getTimestamp())); // Agregar el ID del mensaje cargado
 
-                    if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
+                    /*if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
 
                         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("selectedUser", selectedDog);
+                        intent.putExtra("userId", LogInFragment.user.getUid());
                         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                         notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), MainActivity.CHANNEL_ID)
@@ -134,23 +137,15 @@ public class ChatActivity extends AppCompatActivity {
                         // Enviar notificación al usuario
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
                             return;
                         }
                         notificationManager.notify(notificationId, notificationBuilder.build());
                         notificationId++;
-                    }
-
-                    chatRecyclerViewAdapter.addData();
-                    // Desplazar a la última posición
-                    chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
+                    }*/
                 }
+                chatRecyclerViewAdapter.addData();
+                // Desplazar a la última posición
+                chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
             }
 
             // Otros métodos de ChildEventListener...

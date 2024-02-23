@@ -23,8 +23,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.guauapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String CHANNEL_ID = "GuauApp_NotificationChannel";
-    private ActivityResultLauncher<String> requestNotificationPermissionLauncher; // Permisos de lectura de contactos
+    //public static final String CHANNEL_ID = "GuauApp_NotificationChannel";
+    //private ActivityResultLauncher<String> requestNotificationPermissionLauncher; // Permisos de lectura de contactos
     private ActivityMainBinding binding;
 
     @Override
@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        initializeLuncherPermission();
-        requestNotificationPermission();
-        createNotificationChannel();
+        //initializeLuncherPermission();
+        //requestNotificationPermission();
+        //createNotificationChannel();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setItemIconTintList(null);
     }
 
-    // Inicializa el launcher para solicitar permisos de lectura de contactos
+    /*// Inicializa el launcher para solicitar permisos de lectura de contactos
     private void initializeLuncherPermission() {
 
         requestNotificationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -89,5 +89,5 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    }
+    }*/
 }
