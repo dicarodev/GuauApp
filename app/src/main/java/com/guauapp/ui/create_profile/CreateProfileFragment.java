@@ -93,7 +93,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
         startActivityForResult(i,GALLERY_INTENT);
-
     }
 
     @Override
@@ -117,7 +116,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
             userImages.add(filePath.getPath());
             filePath.putFile(photosReferences.get(filePath));
         }
-
     }
 
     private void enableBottomBar(boolean enable){
@@ -192,7 +190,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
     }
 
     public void addDog(Dog dog){
-
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
         FirebaseUser user = LogInFragment.user;
