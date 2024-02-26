@@ -29,11 +29,8 @@ public class ChatFragment extends Fragment {
     private String userId;
     private ChatDAO chatDAO;
     private DogsDAO dogsDAO;
-    private List<Dog> usersList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ChatViewModel chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-
         binding = FragmentChatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -56,20 +53,18 @@ public class ChatFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        //bn
     }
 
+    // Carga los usuarios de la base de datos y recupera las salas de chat recientes del usuario
     private void getUsers(){
         dogsDAO.getDogsAsync().thenAccept(this::loadRecentChatroom);
     }
 
+    // Recupera las salas de chat recientes y las muestra en el RecyclerView
     private void loadRecentChatroom(List<Dog> usersList) {
+
         chatDAO.getChatroomsAsync(userId).thenAccept(chatroomList -> {
             if (recentChatRecyclerViewAdapter == null) {
-
-                /*for (Chatroom chatMessage : userChatroomsList) {
-                    loadedMessageIds.add(String.valueOf(chatMessage.getTimestamp()));
-                }*/
 
                 // Si el adaptador es nulo, crea uno nuevo y configura el RecyclerView
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
