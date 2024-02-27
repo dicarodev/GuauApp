@@ -202,9 +202,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     private void setAges() {
         List<String> ageList = new ArrayList<>();
-        ageList.add("cachorro");
-        ageList.add("adulto");
-        ageList.add("senior");
+        ageList.add("Cachorro");
+        ageList.add("Adulto");
+        ageList.add("Senior");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, ageList);
         spinner_edad.setAdapter(adapter);
     }
