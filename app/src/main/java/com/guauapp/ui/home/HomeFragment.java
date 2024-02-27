@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     Spinner spinner_localidad;
     Switch switch_castrado;
 
-
     // Este método se llama cuando se crea el fragmento
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
