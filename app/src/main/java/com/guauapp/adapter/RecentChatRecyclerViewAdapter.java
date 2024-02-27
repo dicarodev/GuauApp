@@ -52,16 +52,20 @@ public class RecentChatRecyclerViewAdapter extends RecyclerView.Adapter<RecentCh
         List<String> usersInChatroom = chatroom.getUsersId();
         String otherUserId;
 
+        // Comprueba el indice de la lista donde se encuentra el usuario actual para obtener el id del otro usuario
         if (!usersInChatroom.get(0).equals(LogInFragment.user.getUid())) {
             otherUserId = usersInChatroom.get(0);
         }else {
             otherUserId = usersInChatroom.get(1);
         }
 
+        // Busca el otro usuario en la lista de usuarios
         for (Dog user : usersList) {
+            // Comprueba si el id del otro usuario coincide con el id del usuario de la lista de usuarios
             if (otherUserId.equals(user.getId())) {
-                holder.userName.setText(user.getOwner_name());
+                holder.userName.setText(user.getOwner_name()); //Si coincide, muestra el nombre del otro usuario de la sala de chat
 
+                // Crea un intent para abrir la actividad ChatActivity cuando se hace clic en un usuario
                 holder.itemView.setOnClickListener(v -> {
                     Intent intent = new Intent(holder.itemView.getContext(), ChatActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
