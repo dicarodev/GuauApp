@@ -175,8 +175,8 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
             gender = "Hembra";
         }
         Dog dog = new Dog(LogInFragment.user.getUid(),
-                            dogName.getText().toString(),
-                            owenerName.getText().toString(),
+                            dogName.getText().toString().toUpperCase(),
+                            owenerName.getText().toString().toUpperCase(),
                             breed,
                             province,
                             location,
