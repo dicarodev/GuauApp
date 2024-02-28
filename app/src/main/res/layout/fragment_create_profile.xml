@@ -190,6 +190,27 @@
                     android:text="Senior" />
             </RadioGroup>
 
+            <RadioGroup
+                android:id="@+id/rd_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation='horizontal'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RadioButton
+                    android:id="@+id/rd_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Macho" />
+
+                <RadioButton
+                    android:id="@+id/rd_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hembra" />
+            </RadioGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
