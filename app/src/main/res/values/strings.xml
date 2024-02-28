@@ -8,7 +8,7 @@
     <string name="title_friend">Friend</string>
     <string name="channel_description">Chat notifications channel</string>
     <string name="default_web_client_id">968948311369-6h2b0bltg4m28nbhna21hge20v3b5ucl.apps.googleusercontent.com</string>
-    <string name="btn_filter">Filter</string>
+    <string name="btn_filter">Filtrar</string>
     <string name="localidad">Localidad:</string>
     <string name="borrar_filtros">Borrar Filtros</string>
 </resources>
