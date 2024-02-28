@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -29,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guauapp.MainActivity;
 import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.R;
+import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
@@ -42,8 +44,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     private FragmentHomeBinding binding;
     private NavController navController;
-    private List<Dog> dogsList = new ArrayList<>();
-    private List<Dog> filteredDogList = new ArrayList<>();
+    private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
+    private List<Dog> filteredDogList = new ArrayList<>();// Lista para almacenar perros filtrados
+    private List<Dog> allDogs = new ArrayList<>();
+    private List<String> listCities = new ArrayList<>();
+    private List<Province> provinceListClon = new ArrayList<>();
+
     private DogsDAO dogsDAO = new DogsDAO();
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager rvLayoutManager;
@@ -52,14 +58,16 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
     private Button btnFiltrar;
-    Button btnBorrarFiltros;
-    Button btnCancelarFiltros;
-    Spinner spinner_raza;
-    Spinner spinner_edad;
+    ImageButton imageButtonFiltros;
+    ImageButton imageButtonCancelar;
+
+
     RadioGroup rg_genero;
     Spinner spinner_provincia;
     Spinner spinner_localidad;
     Switch switch_castrado;
+
+    Province provinceSelected;
 
     // Este método se llama cuando se crea el fragmento
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -115,13 +123,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 dogsList.add(dog);
 //                }
             });
-            configureRecyclerView();
+            configureRecyclerView(dogsList);
         });
     }
 
 
     // Método para configurar y preparar el RecyclerView
-    private void configureRecyclerView() {
+    private void configureRecyclerView(List<Dog> dogsList) {
         recyclerView = binding.recyclerViewDogs;  // Obtiene la referencia al RecyclerView desde el enlace
 
         // Crea un LinearLayoutManager para el RecyclerView
@@ -143,11 +151,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private void mostrardialogoPersonalizado() {
         initFilter();
         btnFiltrar.setOnClickListener(this::filterListener);
-        btnBorrarFiltros.setOnClickListener(this::deleteFilterListener);
-        btnCancelarFiltros.setOnClickListener(this::cancelFilterListener);
+        imageButtonFiltros.setOnClickListener(this::deleteFilterListener);
+        imageButtonCancelar.setOnClickListener(this::cancelFilterListener);
         setProvinces();
-        setAges();
-        setBreeds();
 
         //Con esto puedes cerrar el dialogo y volverlo a abrir
         ViewGroup parentViewGroup = (ViewGroup) dialogView.getParent();
@@ -165,22 +171,37 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
     private void filterListener(View view) {
-        String raza = spinner_raza.getSelectedItem().toString();
-
         int id_genero = rg_genero.getCheckedRadioButtonId();
-        String edad = spinner_edad.getSelectedItem().toString();
+        String gender;
+        if (id_genero == 0) {
+            gender = "Macho";
+        } else {
+            if (id_genero == 1) {
+                gender = "Hembra";
+            } else {
+                gender = "";
+            }
+        }
+
+
         String provincia = spinner_provincia.getSelectedItem().toString();
         String localidad = spinner_localidad.getSelectedItem().toString();
         boolean castrado = switch_castrado.isChecked();
-        String castradoStr = castrado ? "true" : "false";
-        rvAdapter = new DogsRecyclerViewAdapter(filteredDogList);
-        recyclerView.setAdapter(rvAdapter);
-        dialogFilter.dismiss();
+        String castradoStr = castrado ? "true" : "";
+
+        dogsDAO.getDogsAsync().thenAccept(dogs -> {
+            allDogs.clear();
+            allDogs.addAll(dogs);
+            filteredDogList = dogsDAO.getfilterListDog(allDogs, gender, castradoStr, provincia, localidad);
+            configureRecyclerView(filteredDogList);
+
+            dialogFilter.dismiss();
+
+        });
+
     }
 
     private void deleteFilterListener(View view) {
-        spinner_raza.setSelection(0);
-        spinner_edad.setSelection(0);
         rg_genero.clearCheck();
         spinner_provincia.setSelection(0);
         spinner_localidad.setSelection(0);
@@ -189,45 +210,56 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     private void initFilter() {
         btnFiltrar = dialogView.findViewById(R.id.btn_filtrar);
-        btnBorrarFiltros = dialogView.findViewById(R.id.btn_borrarFiltros);
-        btnCancelarFiltros = dialogView.findViewById(R.id.btn_FilterCancel);
-        spinner_raza = dialogView.findViewById(R.id.spinner_Breed);
-        spinner_edad = dialogView.findViewById(R.id.spinner_Age);
+        imageButtonFiltros = dialogView.findViewById(R.id.btn_borrarFiltros);
+        imageButtonCancelar = dialogView.findViewById(R.id.btn_FilterCancel);
         rg_genero = dialogView.findViewById(R.id.radioGroup);
 
         spinner_provincia = dialogView.findViewById(R.id.spinner_Provincia);
         spinner_localidad = dialogView.findViewById(R.id.spinner_Localidad);
         switch_castrado = dialogView.findViewById(R.id.switch_Castrado);
-    }
+        //Borro todos los filtros antes de entrar
+        deleteFilterListener(dialogView.getRootView());
 
-    private void setAges() {
-        List<String> ageList = new ArrayList<>();
-        ageList.add("Cachorro");
-        ageList.add("Adulto");
-        ageList.add("Senior");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, ageList);
-        spinner_edad.setAdapter(adapter);
-    }
-
-    private void setBreeds() {
-        dogsDAO.getBreedsIdAsync().thenAccept(breedList -> {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, breedList);
-            spinner_raza.setAdapter(adapter);
-        });
     }
 
     private void setProvinces() {
         dogsDAO.getProvincesAsync().thenAccept(provinceList -> {
-            spinner_provincia.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, provinceList));
+            //Limpio el clon de la lista
+            provinceListClon.clear();
+            //Al clon le añado la lista original
+            provinceListClon.addAll(provinceList);
+            //Creo una provincia vacía
+            Province emptyProvince = new Province();
+            //Le asigno el nombre vacío
+            emptyProvince.setProvince("");
+            //Lo añado al clon
+            provinceListClon.add(0, emptyProvince);
+            //Creo una lista con los nombres de las provincias
+            List<String> provinceNames = new ArrayList<>();
+            //Recorro la lista de provincias
+            for (Province province : provinceListClon) {
+                //Añado el nombre de la provincia a la lista
+                provinceNames.add(province.getProvince());
+            }
+            //Creo un adaptador para el spinner y le asigno la lista de nombres
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, provinceNames);
+            spinner_provincia.setAdapter(adapter);
             spinner_provincia.setOnItemSelectedListener(this);
         });
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Province province = (Province) spinner_provincia.getSelectedItem();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_activated_1, province.getCities());
+        provinceSelected = provinceListClon.get(position);
+        listCities.clear();
+        if (provinceSelected.getProvince().isEmpty()) {
+            listCities.add("Selecciona una provincia");
+        } else {
+            listCities.addAll(provinceSelected.getCities());
+            listCities.add(0, "");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_list_item_activated_1, listCities);
         spinner_localidad.setAdapter(adapter);
     }
 
