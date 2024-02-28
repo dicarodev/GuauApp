@@ -127,11 +127,13 @@ public class DogsDAO {
             if ((gender.isEmpty() || gender.equalsIgnoreCase(dog.getGender()))
                     && (castrado.isEmpty() || castrado.equalsIgnoreCase(String.valueOf(dog.getCastrated())))
                     && (provincia.isEmpty() || provincia.equalsIgnoreCase(dog.getProvince()))
-                    && (localidad.equalsIgnoreCase("Selecciona una provincia")|| localidad.equalsIgnoreCase(dog.getLocation()))) {
+                    && (localidad.equalsIgnoreCase("Selecciona una provincia") || localidad.equalsIgnoreCase(dog.getLocation()) || localidad.isEmpty())) {
                 filterDogList.add(dog);
             }
         }
         return filterDogList;
     }
+
+
 }
 

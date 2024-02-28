@@ -4,6 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.guauapp.MainActivity;
+import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
@@ -32,10 +38,11 @@ import com.guauapp.model.Province;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private FragmentHomeBinding binding;  // Objeto de enlace para el diseño de HomeFragment
+    private FragmentHomeBinding binding;
     private NavController navController;
     private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private List<Dog> filteredDogList = new ArrayList<>();// Lista para almacenar perros filtrados
@@ -44,14 +51,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private List<Province> provinceListClon = new ArrayList<>();
 
     private DogsDAO dogsDAO = new DogsDAO();
-    private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
-    private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
-    private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
-    public static Dog selectedDog = null; // Perro seleccionado en el RecyclerView
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager rvLayoutManager;
+    private RecyclerView.Adapter rvAdapter;
     private View dialogView;
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
-    private FloatingActionButton fab;
     private Button btnFiltrar;
     ImageButton imageButtonFiltros;
     ImageButton imageButtonCancelar;
@@ -61,6 +66,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     Spinner spinner_provincia;
     Spinner spinner_localidad;
     Switch switch_castrado;
+
     Province provinceSelected;
 
     // Este método se llama cuando se crea el fragmento
@@ -75,13 +81,27 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         dialogView = inflater.inflate(R.layout.filter_dialog, null, false);
         builder = new AlertDialog.Builder(requireContext());
-        LayoutInflater inflater_dialog = getLayoutInflater();
 
-
-        fab = binding.fabFiltros;
-        fab.setOnClickListener(view -> mostrardialogoPersonalizado());
-
+        setHasOptionsMenu(true);
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_filter, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.btnFloat){
+            dialogView = getLayoutInflater().inflate(R.layout.filter_dialog, null, false);
+            builder = new AlertDialog.Builder(getContext());
+            mostrardialogoPersonalizado();
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     // Este método se llama cuando el fragmento está a punto de hacerse visible

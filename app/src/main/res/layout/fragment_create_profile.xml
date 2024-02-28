@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="400dp"
         android:fitsSystemWindows="true">
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -76,23 +76,20 @@
                 android:layout_marginEnd="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/bg_spinner"
                 app:layout_constraintTop_toBottomOf="@+id/spn_province" />
 
             <Button
                 android:id="@+id/btn_addDog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="56dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:text="Añadir perro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sw_castrated"
-                app:layout_constraintVertical_bias="0.119" />
+                app:layout_constraintTop_toBottomOf="@+id/sw_castrated" />
 
             <Spinner
                 android:id="@+id/spn_province"
@@ -103,7 +100,8 @@
                 android:layout_marginEnd="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spn_breed" />
+                app:layout_constraintTop_toBottomOf="@+id/spn_breed"
+                android:background="@drawable/bg_spinner"/>
 
             <Spinner
                 android:id="@+id/spn_breed"
@@ -114,7 +112,8 @@
                 android:layout_marginEnd="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_owenerName" />
+                app:layout_constraintTop_toBottomOf="@+id/txv_owenerName"
+                android:background="@drawable/bg_spinner"/>
 
             <EditText
                 android:id="@+id/txv_dogName"
@@ -133,7 +132,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
             <EditText
                 android:id="@+id/txv_descrption"
                 android:layout_width="344dp"
@@ -141,25 +139,28 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/edit_text_rounded"
+                android:backgroundTint="#B2F6D9C9"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Descripcion"
                 android:inputType="textMultiLine"
                 android:maxLength="200"
+                android:padding="20px"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spn_cities" />
+
 
             <Switch
                 android:id="@+id/sw_castrated"
                 android:layout_width="120dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
                 android:text="Castrado"
+                app:layout_constraintBottom_toBottomOf="@+id/rd_gender"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_descrption" />
+                app:layout_constraintTop_toTopOf="@+id/rd_gender" />
 
             <RadioGroup
                 android:id="@+id/rd_age"
@@ -168,46 +169,71 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation='horizontal'
-                app:layout_constraintStart_toEndOf="@+id/sw_castrated"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txv_descrption">
 
                 <RadioButton
                     android:id="@+id/rd_puppy"
-                    android:layout_width="match_parent"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_radio_buttons"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:padding="10px"
                     android:text="Cachorro" />
 
                 <RadioButton
                     android:id="@+id/rd_adult"
-                    android:layout_width="match_parent"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_radio_buttons"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
                     android:text="Adulto" />
 
                 <RadioButton
                     android:id="@+id/rd_senior"
-                    android:layout_width="match_parent"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_radio_buttons"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
                     android:text="Senior" />
+
             </RadioGroup>
+
 
             <RadioGroup
                 android:id="@+id/rd_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:orientation='horizontal'
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rd_age">
 
                 <RadioButton
                     android:id="@+id/rd_male"
-                    android:layout_width="match_parent"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_radio_buttons"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
                     android:text="Macho" />
 
                 <RadioButton
                     android:id="@+id/rd_female"
-                    android:layout_width="match_parent"
+                    android:layout_width="65dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/bg_radio_buttons"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
                     android:text="Hembra" />
             </RadioGroup>
 
@@ -223,6 +249,7 @@
         android:baselineAlignBottom="false"
         android:src="@drawable/add"
         android:tint="#facf5a"
+        app:backgroundTint="#5C3D2E"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="end|bottom" />
