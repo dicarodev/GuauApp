@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.guauapp.adapter.ImageProfileAdapter;
@@ -29,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -41,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private StorageReference mStrorage;
 
     private ArrayList<String> userImages;
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,7 +101,21 @@ public class ProfileFragment extends Fragment {
             userImages.add(filePath.getPath());
             filePath.putFile(photosReferences.get(filePath));
         }
+        List<String> localImages = dog.getImages();
+        try{
+            localImages.forEach(i -> userImages.add(i));
+        }catch (Exception e){
+
+        }
         dog.setImages(userImages);
+        addPhotos();
+    }
+
+    public void addPhotos(){
+        // Generar una clave única para el nuevo perro en la base de datos
+        FirebaseUser user = LogInFragment.user;
+        // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
+        mDatabase.child("dogs").child(user.getUid()).setValue(dog);
     }
 
 
