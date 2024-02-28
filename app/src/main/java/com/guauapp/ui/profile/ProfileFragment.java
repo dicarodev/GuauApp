@@ -65,8 +65,9 @@ public class ProfileFragment extends Fragment {
     private void addPhoto(View view) {
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
-        startActivityForResult(i,GALLERY_INTENT);
+        startActivityForResult(i, GALLERY_INTENT);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -77,8 +78,8 @@ public class ProfileFragment extends Fragment {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                     photosList.add(bitmap);
 
-                    if(adapter == null){
-                        adapter = new ImageProfileAdapter(this.getContext(),photosList);
+                    if (adapter == null) {
+                        adapter = new ImageProfileAdapter(this.getContext(), photosList);
                         binding.profileRecyclerView.setAdapter(adapter);
                     }
                     adapter.notifyDataSetChanged();
@@ -96,22 +97,23 @@ public class ProfileFragment extends Fragment {
         }
 
     }
+
     private void insertPhotosIntoStorage() {
-        for(StorageReference filePath : photosReferences.keySet()) {
+        for (StorageReference filePath : photosReferences.keySet()) {
             userImages.add(filePath.getPath());
             filePath.putFile(photosReferences.get(filePath));
         }
         List<String> localImages = dog.getImages();
-        try{
+        try {
             localImages.forEach(i -> userImages.add(i));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         dog.setImages(userImages);
         addPhotos();
     }
 
-    public void addPhotos(){
+    public void addPhotos() {
         // Generar una clave única para el nuevo perro en la base de datos
         FirebaseUser user = LogInFragment.user;
         // Establecer el valor del nuevo perro en la base de datos utilizando la clave generada
@@ -127,6 +129,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
     private void updateUIWithDogInfo() {
         binding.txvProfileDogName.setText(dog.getDog_name());
         binding.txvProfileOwnerName.setText(dog.getOwner_name());
@@ -145,14 +148,14 @@ public class ProfileFragment extends Fragment {
         dog.getImages().forEach(image -> {
             StorageReference msStorageReference = FirebaseStorage.getInstance().getReference().child(image);
             msStorageReference.getMetadata().addOnSuccessListener(storageMetadata -> {
-                String type =  storageMetadata.getContentType().split("/")[1];
+                String type = storageMetadata.getContentType().split("/")[1];
                 System.out.println(type);
                 try {
                     File localFile = File.createTempFile(msStorageReference.getName(), type);
                     msStorageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                         photosList.add(bitmap);
-                        if(adapter != null) {
+                        if (adapter != null) {
                             adapter.notifyDataSetChanged();
                         }
                     });
@@ -162,8 +165,9 @@ public class ProfileFragment extends Fragment {
             });
         });
     }
+
     private void createCarousel() {
-        adapter = new ImageProfileAdapter(this.getContext(),photosList);
+        adapter = new ImageProfileAdapter(this.getContext(), photosList);
         binding.profileRecyclerView.setAdapter(adapter);
     }
 

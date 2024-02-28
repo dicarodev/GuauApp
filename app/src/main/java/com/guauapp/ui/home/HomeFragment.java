@@ -35,6 +35,7 @@ import com.guauapp.databinding.FragmentHomeBinding;
 import com.guauapp.model.Dog;
 import com.guauapp.model.DogsDAO;
 import com.guauapp.model.Province;
+import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +96,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.btnFloat){
+        if (id == R.id.btnFloat) {
             dialogView = getLayoutInflater().inflate(R.layout.filter_dialog, null, false);
             builder = new AlertDialog.Builder(getContext());
             mostrardialogoPersonalizado();
@@ -112,16 +113,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
 
         getDogs();
-        //configureRecyclerView();  // Configura y prepara el RecyclerView
     }
 
     public void getDogs() {
         dogsDAO.getDogsAsync().thenAccept(dogs -> {
             dogsList.clear();
             dogs.forEach(dog -> {
-//                if (dog.getDog_name().equalsIgnoreCase("rex")) {
-                dogsList.add(dog);
-//                }
+                if (!dog.getId().equals(LogInFragment.user.getUid()))
+                    dogsList.add(dog);
             });
             configureRecyclerView(dogsList);
         });
