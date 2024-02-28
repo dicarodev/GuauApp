@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chat.ChatActivity">
+    tools:context=".ui.chat.ChatActivity"
+    android:background="@color/brown_light">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatMessages_recyclerView"
@@ -27,7 +28,7 @@
             android:layout_toStartOf="@id/btn_sendMessage"
             android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
-            android:hint="Write message here"
+            android:hint="@string/hint_editText_chat"
             android:padding="10dp" />
 
         <ImageButton
@@ -37,8 +38,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:background="@color/white"
-            android:contentDescription="Send Messages"
+            android:background="@color/brown_light"
+            android:contentDescription="@string/sendMessage_btn_description"
             android:src="@drawable/send_message_icon" />
 
     </RelativeLayout>

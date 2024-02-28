@@ -1,9 +1,5 @@
 package com.guauapp.ui.chat;
 
-import android.Manifest;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -11,18 +7,15 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.guauapp.MainActivity;
-import com.guauapp.adapter.ChatRecyclerViewAdapter;
 import com.guauapp.R;
+import com.guauapp.adapter.ChatRecyclerViewAdapter;
 import com.guauapp.model.ChatDAO;
 import com.guauapp.model.ChatMessage;
 import com.guauapp.model.Chatroom;
@@ -44,7 +37,7 @@ public class ChatActivity extends AppCompatActivity {
     private Dog selectedDog;
     private NotificationCompat.Builder notificationBuilder;
     private int notificationId = 0;
-    private List<String> loadedMessageIds = new ArrayList<>();
+    private List<String> loadedMessages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +46,9 @@ public class ChatActivity extends AppCompatActivity {
 
         chatDAO = new ChatDAO();
 
-        selectedDog = (Dog) getIntent().getExtras().get("selectedUser");
+        selectedDog = (Dog) getIntent().getExtras().get("selectedUser"); //Recibir el usuario seleccionado para la conversación
 
-        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), selectedDog.getId());
+        chatroomId = chatDAO.getChatroomId(LogInFragment.user.getUid(), selectedDog.getId()); //Obtiene el id de la sala de chat
 
         chat_messageInput = findViewById(R.id.chat_messageInput);
         btn_sendMessage = findViewById(R.id.btn_sendMessage);
@@ -67,6 +60,8 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        // Evento de clic del botón para enviar un mensaje
         btn_sendMessage.setOnClickListener(v -> {
             String message = chat_messageInput.getText().toString().trim();
 
@@ -77,11 +72,9 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        getOrCreateChatroom();
-
-        // Llamar al método para cargar los mensajes
-        loadChatMessages();
-        loadNewMessages();
+        getOrCreateChatroom(); //Recuperar o crea la sala de chat
+        loadChatMessages(); //Cargar todos los mensajes de la sala de chat
+        loadNewMessages(); //Cargar nuevos mensajes en la sala de chat
     }
 
     private void loadChatMessages() {
@@ -89,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
             if (chatRecyclerViewAdapter == null) {
 
                 for (ChatMessage chatMessage : chatMessageList) {
-                    loadedMessageIds.add(String.valueOf(chatMessage.getTimestamp()));
+                    loadedMessages.add(String.valueOf(chatMessage.getTimestamp()));
                 }
 
                 // Si el adaptador es nulo, crea uno nuevo y configura el RecyclerView
@@ -113,14 +106,16 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 // Nuevo mensaje agregado
                 ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
+                if (!loadedMessages.contains(String.valueOf(newMessage.getTimestamp()))) {
+                    loadedMessages.add(String.valueOf(newMessage.getTimestamp())); // Agregar el ID del mensaje cargado
 
-                if (!loadedMessageIds.contains(String.valueOf(newMessage.getTimestamp()))) {
-                    loadedMessageIds.add(String.valueOf(newMessage.getTimestamp())); // Agregar el ID del mensaje cargado
-
-                    if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
+                    // Metodo para enviar notificaciones
+                    /*if (newMessage.getSenderId().equalsIgnoreCase(selectedDog.getId())) {
 
                         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("selectedUser", selectedDog);
+                        intent.putExtra("userId", LogInFragment.user.getUid());
                         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                         notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), MainActivity.CHANNEL_ID)
@@ -134,38 +129,27 @@ public class ChatActivity extends AppCompatActivity {
                         // Enviar notificación al usuario
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
                             return;
                         }
                         notificationManager.notify(notificationId, notificationBuilder.build());
                         notificationId++;
-                    }
-
-                    chatRecyclerViewAdapter.addData();
-                    // Desplazar a la última posición
-                    chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
+                    }*/
                 }
-            }
 
+                chatRecyclerViewAdapter.addData();
+                // Desplazar a la última posición
+                chatMessages_recyclerView.smoothScrollToPosition(chatRecyclerViewAdapter.getItemCount() - 1);
+            }
             // Otros métodos de ChildEventListener...
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             }
-
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
             }
-
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -196,7 +180,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatroom.setLastMessageTimestamp(System.currentTimeMillis());
         chatroom.setLastMessageSenderId(LogInFragment.user.getUid());
-        //chatDAO.getChatroomReference(chatroomId).setValue(chatroom);
+        //chatDAO.getChatroomReference(chatroomId).setValue(chatroom); //No se utiliza ya que resetea el nodo
 
         ChatMessage chatMessage = new ChatMessage(message, LogInFragment.user.getUid(), System.currentTimeMillis());
 
