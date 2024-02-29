@@ -18,7 +18,7 @@ public class Dog implements Serializable {
         public Dog() {
         }
 
-        public Dog(String id, String dog_name, String owner_name, String breed, String province, String location, String description, String age, String castrated, ArrayList<String> images) {
+        public Dog(String id, String dog_name, String owner_name, String breed, String province, String location, String description, String gender, String age, String castrated, ArrayList<String> images) {
                 this.id = id;
                 this.dog_name = dog_name;
                 this.owner_name = owner_name;
@@ -26,6 +26,7 @@ public class Dog implements Serializable {
                 this.province = province;
                 this.location = location;
                 this.description = description;
+                this.gender = gender;
                 this.age = age;
                 this.castrated = castrated;
                 this.images = images;
@@ -110,4 +111,11 @@ public class Dog implements Serializable {
                 this.images = images;
         }
 
+        public String getGender() {
+                return gender;
+        }
+
+        public void setGender(String gender) {
+                this.gender = gender;
+        }
 }

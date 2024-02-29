@@ -43,5 +43,4 @@
             android:src="@drawable/send_message_icon" />
 
     </RelativeLayout>
-
 </RelativeLayout>

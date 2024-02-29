@@ -121,7 +121,13 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
                 }
             });
 
+        } else {
+            // Si no hay imágenes, cambia el tamaño a wrap_content
+            holder.getImgDog().getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
         }
+
+        // Actualizar el tamaño de ImageView
+        holder.getImgDog().requestLayout();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

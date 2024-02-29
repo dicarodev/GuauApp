@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ctr_bg"
+    android:backgroundTint="#B85C38"
     tools:context=".ui.profile.ProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,14 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:fitsSystemWindows="true">
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/ctr_bg"
             android:fitsSystemWindows="true"
             app:contentScrim="#95000000"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            android:id="@+id/collapsing_toolbar"
-            android:background="@drawable/ctr_bg">
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profile_recyclerView"
@@ -35,7 +37,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -77,12 +79,12 @@
             <TextView
                 android:id="@+id/txv_profile_dogName"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="24dp"
                 android:hint="Dog name"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -91,6 +93,7 @@
                 android:id="@+id/line"
                 android:layout_width="350dp"
                 android:layout_height="1dp"
+                android:layout_marginTop="8dp"
                 android:background="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,21 +103,24 @@
                 android:id="@+id/txv_profile_breed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="148dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:hint="Breed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_profile_location" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgDogProfile"
+                app:layout_constraintTop_toTopOf="@+id/imgDogProfile" />
 
             <TextView
                 android:id="@+id/txv_profile_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="148dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="8dp"
                 android:hint="Age"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_profile_ownerName" />
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/imgDogProfile"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_breed" />
 
             <TextView
                 android:id="@+id/txv_profile_province"
@@ -122,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:hint="Province"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 app:layout_constraintStart_toEndOf="@+id/img_profileLocation"
                 app:layout_constraintTop_toTopOf="@+id/img_profileLocation" />
 
@@ -132,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:hint="Location"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/img_profileLocation"
                 app:layout_constraintTop_toBottomOf="@+id/txv_profile_province" />
 
@@ -140,7 +147,11 @@
                 android:layout_width="344dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_rounded"
+                android:backgroundTint="#B2F6D9C9"
                 android:hint="Descripcion...."
+                android:padding="20px"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txv_profileDesc" />
@@ -149,20 +160,30 @@
                 android:id="@+id/txv_profile_ownerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="148dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
                 android:hint="Owner name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_profile_breed" />
+                app:layout_constraintBottom_toTopOf="@+id/line"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/img_profileLocation"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
+                android:layout_width="38dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_location"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_moreInfo" />
+
+            <ImageView
+                android:id="@+id/imgDogProfile"
+                android:layout_width="71dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/dog_profile"
+                app:layout_constraintStart_toEndOf="@+id/txv_profile_province"
                 app:layout_constraintTop_toBottomOf="@+id/txv_moreInfo" />
 
             <TextView
@@ -189,18 +210,27 @@
                 android:id="@+id/txv_profile_castrated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="148dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginStart="8dp"
                 android:hint="Castrated"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_profile_age"
-                app:layout_constraintVertical_bias="0.0" />
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/imgDogProfile"
+                app:layout_constraintTop_toBottomOf="@+id/txv_profile_age" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:baselineAlignBottom="false"
+        android:src="@drawable/add"
+        app:backgroundTint="#5C3D2E"
+        app:fabSize="normal"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="end|bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
