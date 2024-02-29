@@ -13,4 +13,6 @@
     <string name="borrar_filtros">Borrar Filtros</string>
     <string name="sendMessage_btn_description">Send Messages</string>
     <string name="hint_editText_chat">Escribe el mensaje aquí</string>
+    <string name="female">Hembra</string>
+    <string name="male">Macho</string>
 </resources>

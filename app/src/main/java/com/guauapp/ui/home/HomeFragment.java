@@ -2,6 +2,8 @@ package com.guauapp.ui.home;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,10 +16,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,6 +30,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.resource.drawable.DrawableResource;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guauapp.MainActivity;
 import com.guauapp.adapter.DogsRecyclerViewAdapter;
@@ -40,13 +45,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
 
     private FragmentHomeBinding binding;
     private NavController navController;
     private List<Dog> dogsList = new ArrayList<>();  // Lista para almacenar nombres de perros
     private List<Dog> filteredDogList = new ArrayList<>();// Lista para almacenar perros filtrados
-    private List<Dog> allDogs = new ArrayList<>();
+    private List<Dog> listaPerrosAfiltrar = new ArrayList<>();
     private List<String> listCities = new ArrayList<>();
     private List<Province> provinceListClon = new ArrayList<>();
 
@@ -63,6 +68,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
 
     RadioGroup rg_genero;
+    RadioButton rb_male;
+    RadioButton rb_female;
+
     Spinner spinner_provincia;
     Spinner spinner_localidad;
     Switch switch_castrado;
@@ -119,9 +127,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         dogsDAO.getDogsAsync().thenAccept(dogs -> {
             dogsList.clear();
             dogs.forEach(dog -> {
-//                if (dog.getDog_name().equalsIgnoreCase("rex")) {
                 dogsList.add(dog);
-//                }
             });
             configureRecyclerView(dogsList);
         });
@@ -190,9 +196,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         String castradoStr = castrado ? "true" : "";
 
         dogsDAO.getDogsAsync().thenAccept(dogs -> {
-            allDogs.clear();
-            allDogs.addAll(dogs);
-            filteredDogList = dogsDAO.getfilterListDog(allDogs, gender, castradoStr, provincia, localidad);
+            listaPerrosAfiltrar.clear();
+            listaPerrosAfiltrar.addAll(dogs);
+            filteredDogList = dogsDAO.getfilterListDog(listaPerrosAfiltrar, gender, castradoStr, provincia, localidad);
             configureRecyclerView(filteredDogList);
 
             dialogFilter.dismiss();
@@ -213,10 +219,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         imageButtonFiltros = dialogView.findViewById(R.id.btn_borrarFiltros);
         imageButtonCancelar = dialogView.findViewById(R.id.btn_FilterCancel);
         rg_genero = dialogView.findViewById(R.id.radioGroup);
+        rb_male = dialogView.findViewById(R.id.rb_Macho);
+        rb_female = dialogView.findViewById(R.id.rb_Hembra);
+
 
         spinner_provincia = dialogView.findViewById(R.id.spinner_Provincia);
         spinner_localidad = dialogView.findViewById(R.id.spinner_Localidad);
         switch_castrado = dialogView.findViewById(R.id.switch_Castrado);
+        rg_genero.setOnCheckedChangeListener(this);
         //Borro todos los filtros antes de entrar
         deleteFilterListener(dialogView.getRootView());
 
@@ -248,12 +258,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         });
     }
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         provinceSelected = provinceListClon.get(position);
         listCities.clear();
         if (provinceSelected.getProvince().isEmpty()) {
-            listCities.add("Selecciona una provincia");
+            listCities.add("Selecciona provincia");
         } else {
             listCities.addAll(provinceSelected.getCities());
             listCities.add(0, "");
@@ -266,5 +277,20 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId == R.id.rb_Hembra) {
+            rb_female.setTextColor(getResources().getColor(R.color.pink));
+        } else {
+            rb_female.setTextColor(Color.BLACK);
+        }
+
+            if (checkedId == R.id.rb_Macho) {
+            rb_male.setTextColor(getResources().getColor(R.color.blue));
+        }else{
+            rb_male.setTextColor(Color.BLACK);
+            }
     }
 }
