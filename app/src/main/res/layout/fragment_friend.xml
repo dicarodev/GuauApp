@@ -98,7 +98,7 @@
 
             <TextView
                 android:id="@+id/txv_friend_location"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:hint="@string/friend_location"

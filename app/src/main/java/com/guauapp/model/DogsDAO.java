@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +128,9 @@ public class DogsDAO {
             if ((gender.isEmpty() || gender.equalsIgnoreCase(dog.getGender()))
                     && (castrado.isEmpty() || castrado.equalsIgnoreCase(String.valueOf(dog.getCastrated())))
                     && (provincia.isEmpty() || provincia.equalsIgnoreCase(dog.getProvince()))
-                    && (localidad.equalsIgnoreCase("Selecciona provincia") || localidad.equalsIgnoreCase(dog.getLocation()) || localidad.isEmpty())) {
+                    && (localidad.equalsIgnoreCase("Selecciona provincia") || localidad.equalsIgnoreCase(dog.getLocation()) || localidad.isEmpty())
+                    && (!dog.getId().equals(LogInFragment.user.getUid()))
+            ) {
                 filterDogList.add(dog);
             }
         }
