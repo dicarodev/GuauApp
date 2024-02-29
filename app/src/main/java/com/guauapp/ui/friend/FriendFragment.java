@@ -92,6 +92,16 @@ public class FriendFragment extends Fragment {
         // Establece si el perro amigo está castrado
         String castrated = friendDog.getCastrated().toString().equalsIgnoreCase("true") ? "Castrado" : "No castrado";
         binding.txvFriendCastrated.setText(castrated);
+        // Establece el sexo del perro amigo
+        if (friendDog.getGender() != null && !friendDog.getGender().isEmpty()) {
+            if (friendDog.getGender().equalsIgnoreCase("Macho"))
+                binding.imgFriendDogGender.setImageResource(R.drawable.male);
+            else if (friendDog.getGender().equalsIgnoreCase("Hembra"))
+                binding.imgFriendDogGender.setImageResource(R.drawable.female);
+            else
+                binding.imgFriendDogGender.setVisibility(View.INVISIBLE);
+        } else
+            binding.imgFriendDogGender.setVisibility(View.INVISIBLE);
 
         // Obtiene imágenes asociadas al perro amigo y actualiza el carrusel de imágenes
         getImages();
