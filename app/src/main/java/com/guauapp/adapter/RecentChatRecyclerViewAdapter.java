@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guauapp.R;
-import com.guauapp.model.ChatMessage;
 import com.guauapp.model.Chatroom;
 import com.guauapp.model.Dog;
 import com.guauapp.ui.chat.ChatActivity;

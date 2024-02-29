@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -28,9 +27,7 @@ import java.util.List;
 
 public class FriendFragment extends Fragment {
 
-    private FriendViewModel mViewModel;
     private FragmentFriendBinding binding;
-    private NavController navController;
     private ArrayList<Bitmap> photosList;
     private Dog selectedDog;
     private ImageProfileAdapter adapter;

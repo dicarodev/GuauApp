@@ -1,7 +1,6 @@
 package com.guauapp.model;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 public class Dog implements Serializable {
         private String id;
         private String dog_name;
