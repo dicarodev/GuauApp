@@ -182,10 +182,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private void filterListener(View view) {
         int id_genero = rg_genero.getCheckedRadioButtonId();
         String gender;
-        if (id_genero == 0) {
+        if (id_genero == rb_male.getId()) {
             gender = "Macho";
         } else {
-            if (id_genero == 1) {
+            if (id_genero == rb_female.getId()) {
                 gender = "Hembra";
             } else {
                 gender = "";
