@@ -23,4 +23,6 @@
     <string name="friend_propetaryName">Nombre dueño</string>
     <string name="friend_titleDescription">Descripción</string>
     <string name="friend_moreInfo">Mas información</string>
+    <string name="female">Hembra</string>
+    <string name="male">Macho</string>
 </resources>
