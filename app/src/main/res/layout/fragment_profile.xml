@@ -181,7 +181,7 @@
                 android:id="@+id/imgDogProfile"
                 android:layout_width="71dp"
                 android:layout_height="57dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/dog_profile"
                 app:layout_constraintStart_toEndOf="@+id/txv_profile_province"

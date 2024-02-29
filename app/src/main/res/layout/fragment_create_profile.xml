@@ -160,7 +160,10 @@
                 android:text="Castrado"
                 app:layout_constraintBottom_toBottomOf="@+id/rd_gender"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rd_gender" />
+                app:layout_constraintTop_toTopOf="@+id/rd_gender"
+                android:textStyle="bold"
+                android:thumbTint="@color/brown_app_name"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <RadioGroup
                 android:id="@+id/rd_age"
@@ -181,7 +184,8 @@
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:padding="10px"
-                    android:text="Cachorro" />
+                    android:text="Cachorro"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rd_adult"
@@ -191,7 +195,8 @@
                     android:background="@drawable/bg_radio_buttons"
                     android:button="@android:color/transparent"
                     android:gravity="center"
-                    android:text="Adulto" />
+                    android:text="Adulto"
+                    android:textStyle="bold"/>
 
                 <RadioButton
                     android:id="@+id/rd_senior"
@@ -201,7 +206,8 @@
                     android:background="@drawable/bg_radio_buttons"
                     android:button="@android:color/transparent"
                     android:gravity="center"
-                    android:text="Senior" />
+                    android:text="Senior"
+                    android:textStyle="bold"/>
 
             </RadioGroup>
 
@@ -224,7 +230,8 @@
                     android:background="@drawable/bg_radio_buttons"
                     android:button="@android:color/transparent"
                     android:gravity="center"
-                    android:text="Macho" />
+                    android:text="Macho"
+                    android:textStyle="bold"/>
 
                 <RadioButton
                     android:id="@+id/rd_female"
@@ -234,7 +241,8 @@
                     android:background="@drawable/bg_radio_buttons"
                     android:button="@android:color/transparent"
                     android:gravity="center"
-                    android:text="Hembra" />
+                    android:text="Hembra"
+                    android:textStyle="bold"/>
             </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

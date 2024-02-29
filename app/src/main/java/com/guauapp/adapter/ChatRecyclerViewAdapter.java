@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.guauapp.R;
 import com.guauapp.model.ChatMessage;
-import com.guauapp.ui.chat.ChatActivity;
 import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.List;

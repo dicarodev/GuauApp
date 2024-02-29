@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,8 +55,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
     private Button btnFiltrar;
-    ImageButton imageButtonFiltros;
-    ImageButton imageButtonCancelar;
+    private ImageButton imageButtonFiltros;
+    private ImageButton imageButtonCancelar;
 
 
     RadioGroup rg_genero;
@@ -79,8 +80,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         builder = new AlertDialog.Builder(requireContext());
 
         setHasOptionsMenu(true);
+
         return root;
     }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

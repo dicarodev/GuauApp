@@ -5,7 +5,7 @@
             <!-- Fondo con sombra -->
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/brown_orange" />
+                    <solid android:color="@color/beige" />
                     <corners android:radius="8dp" />
                     <stroke
                         android:width="2dp"
@@ -37,7 +37,7 @@
             <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
                 <shape android:shape="rectangle">
                     <corners android:radius="8dp" />
-                    <solid android:color="#66000000" />
+                    <solid android:color="#23000000" />
                 </shape>
             </item>
         </layer-list>

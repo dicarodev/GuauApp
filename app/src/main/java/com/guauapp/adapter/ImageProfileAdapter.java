@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.guauapp.R;
-import com.guauapp.adapter.ImageAdapter;
 
 import java.util.ArrayList;
 
