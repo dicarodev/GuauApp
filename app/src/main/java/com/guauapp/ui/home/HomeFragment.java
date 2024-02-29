@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,9 +25,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.guauapp.MainActivity;
-import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.R;
 import com.guauapp.adapter.DogsRecyclerViewAdapter;
 import com.guauapp.databinding.FragmentHomeBinding;
@@ -39,7 +35,6 @@ import com.guauapp.ui.logIn.LogInFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -55,7 +50,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private RecyclerView recyclerView;  // RecyclerView para mostrar la lista de perros
     private RecyclerView.LayoutManager rvLayoutManager;  // LayoutManager para el RecyclerView
     private RecyclerView.Adapter rvAdapter;  // Adaptador para el RecyclerView
-    public static Dog selectedDog = null; // Perro seleccionado en el RecyclerView
     private View dialogView;
     private Dialog dialogFilter;
     private AlertDialog.Builder builder;
