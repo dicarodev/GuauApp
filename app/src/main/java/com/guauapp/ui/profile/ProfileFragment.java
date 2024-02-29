@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.guauapp.R;
 import com.guauapp.adapter.ImageProfileAdapter;
 import com.guauapp.databinding.FragmentProfileBinding;
 import com.guauapp.model.Dog;
@@ -140,6 +141,15 @@ public class ProfileFragment extends Fragment {
         binding.txvProfileAge.setText(dog.getAge());
         String castrated = dog.getCastrated().equalsIgnoreCase("true") ? "Castrado" : "No castrado";
         binding.txvProfileCastrated.setText(castrated);
+        if (dog.getGender() != null && !dog.getGender().isEmpty()) {
+            if (dog.getGender().equalsIgnoreCase("Macho"))
+                binding.imgDogGender.setImageResource(R.drawable.male);
+            else if (dog.getGender().equalsIgnoreCase("Hembra"))
+                binding.imgDogGender.setImageResource(R.drawable.female);
+            else
+                binding.imgDogGender.setVisibility(View.INVISIBLE);
+        } else
+            binding.imgDogGender.setVisibility(View.INVISIBLE);
         getImages();
         createCarousel();
     }

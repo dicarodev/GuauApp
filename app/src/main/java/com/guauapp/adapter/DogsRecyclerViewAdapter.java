@@ -41,6 +41,7 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
         private final ImageView imgDog;
         private final TextView txtLocationDog;
         private final TextView txtNameDog;
+        private final ImageView imgDogGender;
         private final TextView txtBreedDog;
 
         public ViewHolder(@NonNull View itemView) {
@@ -48,6 +49,7 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
 
             this.imgDog = itemView.findViewById(R.id.img_cardImage);
             this.txtNameDog = itemView.findViewById(R.id.txv_cardName);
+            this.imgDogGender = itemView.findViewById(R.id.img_cardImageGender);
             this.txtLocationDog = itemView.findViewById(R.id.txv_cardCity);
             this.txtBreedDog = itemView.findViewById(R.id.txv_cardBreed);
         }
@@ -68,6 +70,9 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
             return txtBreedDog;
         }
 
+        public ImageView getImgDogGender() {
+            return imgDogGender;
+        }
     }
 
     @NonNull
@@ -87,6 +92,20 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
         holder.getTxtNameDog().setText(dog.getDog_name());
         holder.getTxtLocationDog().setText(dog.getLocation());
         holder.getTxtBreedDog().setText(dog.getBreed());
+        // Establece el sexo del perro
+        if (dog.getGender() != null && !dog.getGender().isEmpty()) {
+            if (dog.getGender().equalsIgnoreCase("Macho"))
+                holder.getImgDogGender().setImageResource(R.drawable.male);
+            else if (dog.getGender().equalsIgnoreCase("Hembra"))
+                holder.getImgDogGender().setImageResource(R.drawable.female);
+            else
+                holder.getImgDogGender().setVisibility(View.INVISIBLE);
+        } else {
+            holder.getImgDogGender().setVisibility(View.INVISIBLE);
+            // Establecer marginStart a 0 (cero)
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.getImgDogGender().getLayoutParams();
+            params.setMarginStart(0);
+        }
 
         // Verificar si hay imágenes asociadas al perro
         if (dog.getImages() != null && !dog.getImages().isEmpty()) {

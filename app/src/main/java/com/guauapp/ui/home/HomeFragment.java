@@ -290,10 +290,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             rb_female.setTextColor(Color.BLACK);
         }
 
-            if (checkedId == R.id.rb_Macho) {
+        if (checkedId == R.id.rb_Macho) {
             rb_male.setTextColor(getResources().getColor(R.color.blue));
-        }else{
+        } else {
             rb_male.setTextColor(Color.BLACK);
-            }
+        }
     }
 }

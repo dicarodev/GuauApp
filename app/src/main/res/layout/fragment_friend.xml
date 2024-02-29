@@ -75,6 +75,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imgFriendDogGender"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/male"
+                app:layout_constraintBottom_toBottomOf="@+id/txv_friend_dogName"
+                app:layout_constraintStart_toEndOf="@+id/txv_friend_dogName"
+                app:layout_constraintTop_toTopOf="@+id/txv_friend_dogName" />
+
             <View
                 android:id="@+id/frindLine"
                 android:layout_width="350dp"
