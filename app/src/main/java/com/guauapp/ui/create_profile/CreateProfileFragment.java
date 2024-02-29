@@ -93,7 +93,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
         startActivityForResult(i,GALLERY_INTENT);
-
     }
 
     @Override
@@ -117,7 +116,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
             userImages.add(filePath.getPath());
             filePath.putFile(photosReferences.get(filePath));
         }
-
     }
 
     private void enableBottomBar(boolean enable){
@@ -170,16 +168,24 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
             age = "Senior";
         }
         insertPhotosIntoStorage();
+        String gender = "";
+        if (binding.rdMale.isChecked()) {
+            gender = "Macho";
+        } else if (binding.rdFemale.isChecked()) {
+            gender = "Hembra";
+        }
         Dog dog = new Dog(LogInFragment.user.getUid(),
-                            dogName.getText().toString(),
-                            owenerName.getText().toString(),
+                            dogName.getText().toString().toUpperCase(),
+                            owenerName.getText().toString().toUpperCase(),
                             breed,
                             province,
                             location,
                             descrption.getText().toString(),
+                            gender,
                             age,
                             castrated,
-                            userImages);
+                            userImages
+                );
         addDog(dog);
         enableBottomBar(true);
         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_home);
@@ -192,7 +198,6 @@ public class CreateProfileFragment extends Fragment implements AdapterView.OnIte
     }
 
     public void addDog(Dog dog){
-
         // Generar una clave única para el nuevo perro en la base de datos
         String key = mDatabase.child("dogs").push().getKey();
         FirebaseUser user = LogInFragment.user;

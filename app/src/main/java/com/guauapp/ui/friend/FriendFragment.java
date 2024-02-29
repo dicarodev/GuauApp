@@ -93,7 +93,8 @@ public class FriendFragment extends Fragment {
         // Establece la edad del perro amigo
         binding.txvFriendAge.setText(friendDog.getAge());
         // Establece si el perro amigo está castrado
-        binding.txvFriendCastrated.setText(friendDog.getCastrated());
+        String castrated = friendDog.getCastrated().toString().equalsIgnoreCase("true") ? "Castrado" : "No castrado";
+        binding.txvFriendCastrated.setText(castrated);
 
         // Obtiene imágenes asociadas al perro amigo y actualiza el carrusel de imágenes
         getImages();
@@ -150,7 +151,7 @@ public class FriendFragment extends Fragment {
             });
         } else {
             // Si el perro no tiene imágenes, carga la imagen predeterminada desde drawable
-            Bitmap defaultImage = BitmapFactory.decodeResource(getResources(), R.drawable.image_not_found);
+            Bitmap defaultImage = BitmapFactory.decodeResource(getResources(), R.drawable.logo_discord);
             photosList.add(defaultImage);
 
             // Notifica al adaptador que los datos han cambiado

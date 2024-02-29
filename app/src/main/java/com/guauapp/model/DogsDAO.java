@@ -1,20 +1,16 @@
 package com.guauapp.model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 public class DogsDAO {
     DatabaseReference mDatabase;
@@ -125,18 +121,18 @@ public class DogsDAO {
         return future;
     }
 
-    public CompletableFuture<List<Dog>> getFilteredDogsAsync(CompletableFuture<List<Dog>> allDogsFuture, String raza, String edad, String castrado, String provincia, String localidad) {
-        return allDogsFuture.thenApplyAsync(allDogs ->
-                allDogs.stream()
-                        .filter(dog -> (raza.isEmpty() || raza.equals(dog.getBreed()))
-                                && (edad.isEmpty() || edad.equals(dog.getAge()))
-                                && (castrado.isEmpty() || castrado.equals(String.valueOf(dog.getCastrated())))
-                                && (provincia.isEmpty() || provincia.equals(dog.getProvince()))
-                                && (localidad.isEmpty() || localidad.equals(dog.getLocation())))
-                        .collect(Collectors.toList())
-        );
+    public List<Dog> getfilterListDog(List<Dog> allDogs, String gender, String castrado, String provincia, String localidad) {
+        List<Dog> filterDogList = new ArrayList<>();
+        for (Dog dog : allDogs) {
+            if ((gender.isEmpty() || gender.equalsIgnoreCase(dog.getGender()))
+                    && (castrado.isEmpty() || castrado.equalsIgnoreCase(String.valueOf(dog.getCastrated())))
+                    && (provincia.isEmpty() || provincia.equalsIgnoreCase(dog.getProvince()))
+                    && (localidad.equalsIgnoreCase("Selecciona una provincia") || localidad.equalsIgnoreCase(dog.getLocation()) || localidad.isEmpty())) {
+                filterDogList.add(dog);
+            }
+        }
+        return filterDogList;
     }
-
 
 
 }

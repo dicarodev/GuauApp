@@ -8,7 +8,7 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="16dp">
+    app:contentPaddingBottom="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/img_cardImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -39,29 +39,32 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/ic_location" />
 
             <TextView
                 android:id="@+id/txv_cardCity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="Alcázar de San Juan"
                 android:textSize="16dp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:contentDescription="Icono de Raza"
-                app:srcCompat="@drawable/ic_dog_breed" />
+                app:srcCompat="@drawable/dog_profile" />
 
             <TextView
                 android:id="@+id/txv_cardBreed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="Golden Retriever"
