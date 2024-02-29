@@ -13,13 +13,13 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbarFriend"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/ctr_bg"
             android:fitsSystemWindows="true"
             app:contentScrim="#95000000"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            android:id="@+id/collapsing_toolbar"
-            android:background="@drawable/ctr_bg">
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/friendProfile_recyclerView"
@@ -42,8 +42,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewFriend"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/beige"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +53,7 @@
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/friendView"
+                android:id="@+id/friendLine1"
                 android:layout_width="50dp"
                 android:layout_height="3dp"
                 android:layout_marginTop="8dp"
@@ -63,93 +65,153 @@
             <TextView
                 android:id="@+id/txv_friend_dogName"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="24dp"
-                android:gravity="center"
                 android:hint="Dog name"
-                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/friendLine"
+                android:id="@+id/frindLine"
                 android:layout_width="350dp"
                 android:layout_height="1dp"
+                android:layout_marginTop="8dp"
                 android:background="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txv_friend_dogName" />
 
+            <View
+                android:id="@+id/friendLine2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="32dp"
+                android:background="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_friend_description" />
+
             <TextView
                 android:id="@+id/txv_friend_breed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="24dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/friendLine" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="Raza"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/img_friendDogIcon"
+                app:layout_constraintTop_toTopOf="@+id/img_friendDogIcon" />
 
             <TextView
                 android:id="@+id/txv_friend_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:hint="Edad"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/img_friendDogIcon"
                 app:layout_constraintTop_toBottomOf="@+id/txv_friend_breed" />
-
-            <TextView
-                android:id="@+id/txv_friend_castrated"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_friend_age" />" />
 
             <TextView
                 android:id="@+id/txv_friend_province"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_friend_castrated" />
+                android:layout_marginStart="8dp"
+                android:hint="Provincia"
+                android:textSize="22sp"
+                app:layout_constraintStart_toEndOf="@+id/img_friendLocationIcon"
+                app:layout_constraintTop_toTopOf="@+id/img_friendLocationIcon" />
+
+            <TextView
+                android:id="@+id/txv_friend_castrated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Castrado"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/img_friendDogIcon"
+                app:layout_constraintTop_toBottomOf="@+id/txv_friend_age" />" />
 
             <TextView
                 android:id="@+id/txv_friend_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:hint="Location"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/img_friendLocationIcon"
                 app:layout_constraintTop_toBottomOf="@+id/txv_friend_province" />
 
             <TextView
                 android:id="@+id/txv_friend_description"
-                android:layout_width="wrap_content"
+                android:layout_width="344dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:background="@drawable/edit_text_rounded"
+                android:backgroundTint="#B2F6D9C9"
+                android:hint="Descripción"
+                android:padding="20px"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_friend_location" />
+                app:layout_constraintTop_toBottomOf="@+id/txv_friend_descriptionTitle" />
 
             <TextView
                 android:id="@+id/txv_friend_ownerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="40dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/txv_friend_dogName"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Nombre dueño"
+                app:layout_constraintBottom_toTopOf="@+id/frindLine"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_friendLocationIcon"
+                android:layout_width="38dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_moreInfoFriend" />
+
+            <ImageView
+                android:id="@+id/img_friendDogIcon"
+                android:layout_width="71dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/dog_profile"
+                app:layout_constraintStart_toEndOf="@+id/txv_friend_province"
+                app:layout_constraintTop_toBottomOf="@+id/txv_moreInfoFriend" />
+
+            <TextView
+                android:id="@+id/txv_friend_descriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Descripción"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frindLine" />
+
+            <TextView
+                android:id="@+id/txv_moreInfoFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Mas información"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/friendLine2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -164,7 +226,7 @@
         android:baselineAlignBottom="false"
         android:clickable="true"
         android:src="@drawable/ic_newchat"
-        app:backgroundTint="@color/brown_light"
+        app:backgroundTint="@color/blue_light"
         app:fabSize="normal"
         app:layout_anchor="@id/appbarFriend"
         app:layout_anchorGravity="end|bottom"

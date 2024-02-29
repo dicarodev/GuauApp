@@ -8,7 +8,7 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="16dp">
+    app:contentPaddingBottom="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/img_cardImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="Icono de Raza"
-                app:srcCompat="@drawable/ic_dog_breed" />
+                app:srcCompat="@drawable/dog_profile" />
 
             <TextView
                 android:id="@+id/txv_cardBreed"
