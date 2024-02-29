@@ -13,7 +13,8 @@
     <color name="brown_light">#E0C097</color>
     <color name="beige">#f3f0d7</color>
     <color name="blue_light">#cee5d0</color>
-
+    <color name="pink">#D65965</color>
+    <color name="blue">#2196F3</color>
     <color name="chat_color_sender">#1E88E5</color>
     <color name="chat_color_receiver">#7CB342</color>
 </resources>
