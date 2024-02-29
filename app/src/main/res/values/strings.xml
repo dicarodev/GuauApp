@@ -1,16 +1,26 @@
 <resources>
+    <string name="default_web_client_id">968948311369-6h2b0bltg4m28nbhna21hge20v3b5ucl.apps.googleusercontent.com</string>
     <string name="app_name">GuauApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Profile</string>
-    <string name="title_notifications">Chat</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_chats">Chat</string>
     <string name="title_logIn">LogIn</string>
-    <string name="title_create_profile">Create Profile</string>
-    <string name="title_friend" />
+    <string name="title_create_profile">Crear perfil</string>
+    <string name="title_friend"/>
     <string name="channel_description">Chat notifications channel</string>
-    <string name="default_web_client_id">968948311369-6h2b0bltg4m28nbhna21hge20v3b5ucl.apps.googleusercontent.com</string>
     <string name="btn_filter">Filtrar</string>
     <string name="localidad">Localidad:</string>
     <string name="borrar_filtros">Borrar Filtros</string>
     <string name="sendMessage_btn_description">Send Messages</string>
     <string name="hint_editText_chat">Escribe el mensaje aquí</string>
+    <string name="friend_breed">Raza</string>
+    <string name="friend_dog_name">Dog name</string>
+    <string name="friend_age">Edad</string>
+    <string name="friend_location">Location</string>
+    <string name="friend_castrado">Castrado</string>
+    <string name="friend_province">Province</string>
+    <string name="friend_description">Descripción</string>
+    <string name="friend_propetaryName">Nombre dueño</string>
+    <string name="friend_titleDescription">Descripción</string>
+    <string name="friend_moreInfo">Mas información</string>
 </resources>

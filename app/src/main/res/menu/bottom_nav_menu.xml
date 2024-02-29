@@ -11,11 +11,11 @@
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile_icon"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_profile" />
 
     <item
         android:id="@+id/navigation_chat"
         android:icon="@drawable/chat_icon"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_chats" />
 
 </menu>
