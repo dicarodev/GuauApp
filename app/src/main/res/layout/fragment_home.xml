@@ -24,7 +24,6 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/img_filter"
-        app:layout_constraintBottom_toTopOf="@+id/text_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
