@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_chat"
         android:name="com.guauapp.ui.chat.ChatFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_chats"
         tools:layout="@layout/fragment_chat" />
 
     <fragment
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.guauapp.ui.profile.ProfileFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
