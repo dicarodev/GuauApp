@@ -81,10 +81,7 @@ public class LogInFragment extends Fragment {
         enableBottomBar(false);
 
         setDogList();
-        /*if(sharedPreferences.contains("ID_TOKEN")){
-            String token = sharedPreferences.getString("ID_TOKEN", "");
-            firebaseAuthWithGoogle(token);
-        }*/
+
     }
 
     @Override
@@ -106,9 +103,17 @@ public class LogInFragment extends Fragment {
         signInButton.setVisibility(View.VISIBLE);
     }
 
+    private void checkExistingUser(){
+        if(sharedPreferences.contains("ID_TOKEN")){
+            String token = sharedPreferences.getString("ID_TOKEN", "");
+            firebaseAuthWithGoogle(token);
+        }
+    }
+
     private void setDogList() {
         dogsDAO.getDogsIdAsync().thenAccept(dogsList -> {
             dogList.addAll(dogsList);
+            checkExistingUser();
         }).exceptionally(exception -> null);
     }
 

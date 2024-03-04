@@ -22,31 +22,32 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+// Adaptador personalizado para gestionar la visualización de la lista de perros en un RecyclerView.
 public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerViewAdapter.ViewHolder> {
 
-    private List<Dog> dogList;
-    private NavController navController;
-
-    public DogsRecyclerViewAdapter(List<Dog> dogList) {
-        this.dogList = dogList;
-    }
+    private List<Dog> dogList; // Lista que contiene los datos de perros a mostrar en el RecyclerView
+    private NavController navController; // NavController utilizado para la navegación entre fragmentos
 
     public DogsRecyclerViewAdapter(List<Dog> dogList, NavController navController) {
         this.dogList = dogList;
         this.navController = navController;
     }
 
+    // Clase interna estática que representa la vista de cada elemento en el RecyclerView.
+    // Extiende RecyclerView.ViewHolder para proporcionar una referencia a cada vista de ítem.
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView imgDog;
-        private final TextView txtLocationDog;
-        private final TextView txtNameDog;
-        private final ImageView imgDogGender;
-        private final TextView txtBreedDog;
+        private final ImageView imgDog; // ImageView para mostrar la imagen del perro
+        private final TextView txtLocationDog; // TextView para mostrar la ubicación del perro
+        private final TextView txtNameDog; // TextView para mostrar el nombre del perro
+        private final ImageView imgDogGender; // ImageView para mostrar el género del perro (icono)
+        private final TextView txtBreedDog; // TextView para mostrar la raza del perro
 
+        // Constructor que inicializa las vistas del ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // Asignar las vistas del layout a las variables del ViewHolder
             this.imgDog = itemView.findViewById(R.id.img_cardImage);
             this.txtNameDog = itemView.findViewById(R.id.txv_cardName);
             this.imgDogGender = itemView.findViewById(R.id.img_cardImageGender);
@@ -54,6 +55,7 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
             this.txtBreedDog = itemView.findViewById(R.id.txv_cardBreed);
         }
 
+        // Métodos para obtener las vistas desde fuera de la clase
         public ImageView getImgDog() {
             return imgDog;
         }
@@ -75,12 +77,16 @@ public class DogsRecyclerViewAdapter extends RecyclerView.Adapter<DogsRecyclerVi
         }
     }
 
+    // Crea y devuelve una nueva instancia de ViewHolder cuando sea necesario,
+    // inflando el diseño del elemento de la lista a partir de un recurso de diseño específico.
     @NonNull
     @Override
     public DogsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Infla la vista del elemento de la lista desde el archivo de diseño cardview_dog_profile
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cardview_dog_profile, parent, false);
 
+        // Devuelve una nueva instancia de ViewHolder asociada a la vista del elemento de la lista
         return new ViewHolder(view);
     }
 
