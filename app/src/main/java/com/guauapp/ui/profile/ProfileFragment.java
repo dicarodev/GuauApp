@@ -155,25 +155,40 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getImages() {
-        dog.getImages().forEach(image -> {
-            StorageReference msStorageReference = FirebaseStorage.getInstance().getReference().child(image);
-            msStorageReference.getMetadata().addOnSuccessListener(storageMetadata -> {
-                String type = storageMetadata.getContentType().split("/")[1];
-                System.out.println(type);
-                try {
-                    File localFile = File.createTempFile(msStorageReference.getName(), type);
-                    msStorageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        photosList.add(bitmap);
-                        if (adapter != null) {
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        // Obtiene la lista de imágenes del perro seleccionado
+        List<String> images = dog.getImages();
+
+        // Verifica si la lista de imágenes es nula o está vacía
+        if (images != null && !images.isEmpty()) {
+            images.forEach(image -> {
+                StorageReference msStorageReference = FirebaseStorage.getInstance().getReference().child(image);
+                msStorageReference.getMetadata().addOnSuccessListener(storageMetadata -> {
+                    String type = storageMetadata.getContentType().split("/")[1];
+                    System.out.println(type);
+                    try {
+                        File localFile = File.createTempFile(msStorageReference.getName(), type);
+                        msStorageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            photosList.add(bitmap);
+                            if (adapter != null) {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             });
-        });
+        } else {
+            // Si el perro no tiene imágenes, carga la imagen predeterminada desde drawable
+            Bitmap defaultImage = BitmapFactory.decodeResource(getResources(), R.drawable.logo_discord);
+            photosList.add(defaultImage);
+
+            // Notifica al adaptador que los datos han cambiado
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void createCarousel() {
